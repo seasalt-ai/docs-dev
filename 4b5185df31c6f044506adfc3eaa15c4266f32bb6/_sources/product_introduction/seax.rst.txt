@@ -49,5 +49,11 @@ Google Maps integration allows access to many more features, including the abili
 For an overview of additional Google Maps features, please see this video below:
 
 .. raw:: html
+
    <iframe width="560" height="315" src="https://www.youtube.com/embed/xe2Y9kmRR3M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+Finall, WhatsApp integration:
+
+.. raw:: html
+
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/TzToP_Ka4zM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
