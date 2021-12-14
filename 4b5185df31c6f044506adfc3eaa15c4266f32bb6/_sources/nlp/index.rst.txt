@@ -13,4 +13,4 @@ Welcome to SeaWord
    topic_tutorial
    action_tutorial
    xlingualNER_tutorial
-   machine_reading
+   mr_tutorial
