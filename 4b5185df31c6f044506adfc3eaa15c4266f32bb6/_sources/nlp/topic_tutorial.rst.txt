@@ -46,7 +46,7 @@ In this tutorial, we will use a webhook.site URL in the examples.
 API Usage
 ================
 
-The Topic Extraction API supports topic extraction with and without a callback link. The method with a callback link is intended for very long input that will take longer to complete. The method without is intended for short input where timout is not a concern. 
+The Topic Extraction API supports topic extraction with and without a callback link. The method with a callback link is intended for very long input that will take longer to complete. The method without is intended for short input where timeout is not a concern. 
 
 POST /extract_no_callback
 --------------------------
@@ -108,7 +108,7 @@ The callback process is called with the following POST request:
 
     POST https://seachat-backstage.seasalt.ai/topics/{lang_code}/extract
 
-The required request body for no-callback topic extraction is in the following format:
+The required request body for topic extraction with callback is in the following format:
 
 .. code-block:: JSON
 

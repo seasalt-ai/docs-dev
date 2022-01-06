@@ -169,7 +169,7 @@
 </section>
 <section id="api-usage">
 <h2><a class="toc-backref" href="#id3">API Usage</a><a class="headerlink" href="#api-usage" title="Permalink to this headline"></a></h2>
-<p>The Topic Extraction API supports topic extraction with and without a callback link. The method with a callback link is intended for very long input that will take longer to complete. The method without is intended for short input where timout is not a concern.</p>
+<p>The Topic Extraction API supports topic extraction with and without a callback link. The method with a callback link is intended for very long input that will take longer to complete. The method without is intended for short input where timeout is not a concern.</p>
 <section id="post-extract-no-callback">
 <h3><a class="toc-backref" href="#id4">POST /extract_no_callback</a><a class="headerlink" href="#post-extract-no-callback" title="Permalink to this headline"></a></h3>
 <p>The no-callback process is called with the following POST request:</p>
@@ -217,7 +217,7 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>POST https://seachat-backstage.seasalt.ai/topics/<span class="o">{</span>lang_code<span class="o">}</span>/extract
 </pre></div>
 </div>
-<p>The required request body for no-callback topic extraction is in the following format:</p>
+<p>The required request body for topic extraction with callback is in the following format:</p>
 <div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
