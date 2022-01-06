@@ -40,7 +40,7 @@ In this tutorial, we will use a webhook.site URL in the examples.
 API Usage
 ==========
 
-The Sumamrization API supports two types of transcript summarization, short and long. The short summary method is intended to summarize a single utterance from a transcript, to provide fine-grained summarization of the transcript. The long summary method is intended to summarize the entire transcript in large chunks, to provide an overall summary of the transcript.
+The Summarization API supports two types of transcript summarization, short and long. The short summary method is intended to summarize a single utterance from a transcript, to provide fine-grained summarization of the transcript. The long summary method is intended to summarize the entire transcript in large chunks, to provide an overall summary of the transcript.
 
 POST /short/summarize
 ---------------------
@@ -83,7 +83,7 @@ This process is called with the following POST request:
 
     POST https://seachat-backstage.seasalt.ai/summarization/{lang_code}/long/summarize
 
-The required request body for inference contains the entire transcipt in the following format, with speakers and utterances in the ``data`` list. The ``url`` element is the callback URL where the final summary will be returned.
+The required request body for inference contains the entire transcript in the following format, with speakers and utterances in the ``data`` list. The ``url`` element is the callback URL where the final summary will be returned.
 
 .. code-block:: JSON
     
@@ -119,7 +119,7 @@ The required request body for inference contains the entire transcipt in the fol
 
 .. IMPORTANT:: As it takes a comparatively long time to summarize a long segment, this is implemented as a callback. A successful response will return a success message of the process starting, not a summary directly.
 
-The transcipt will be automatically segmentented into the largest chunks possible under 300 words. The callback function will then start producing summaries. When the summarization is complete, a PUT request will be sent with the generated summary to the callback url provided in the original request body.
+The transcript will be automatically segmented into the largest chunks possible under 300 words. The callback function will then start producing summaries. When the summarization is complete, a PUT request will be sent with the generated summary to the callback url provided in the original request body.
 
 The final summaries will appear in the following JSON format:
 
