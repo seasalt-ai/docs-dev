@@ -44,7 +44,7 @@ Welcome to SeaChat's Master Documentation!
 
    SeaWord <nlp/readme>
    Summarization API Tutorial <nlp/sum_tutorial>
-   Topic Prediction API Tutorial <nlp/topic_tutorial>
+   Topic Extraction API Tutorial <nlp/topic_tutorial>
    Action Extraction API Tutorial <nlp/action_tutorial>
    Cross Lingual NER API Tutorial <nlp/xlingualNER_tutorial>
    Machine Reading API Tutorial <nlp/mr_tutorial>

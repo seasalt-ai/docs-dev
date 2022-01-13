@@ -4,18 +4,13 @@
 Summarization API Tutorial
 ==================================
 
-This tutorial will walk through how to use multilingual models with the Summarization API for meeting analytics.
+This tutorial will walk through how to use the Summarization API for meeting analytics.
 
 .. contents:: Table of Contents
     :local:
     :depth: 3
 
 The endpoint for the Summarization API is ``https://seachat-backstage.seasalt.ai/summarization``.
-
-All of the following API calls can be viewed and tested with the `Swagger docs <https://seachat-backstage.seasalt.ai/summarization/docs#/>`_ for this API.
-
-The current summarization models are stored in the Azure fileshare at ``/mnt/models/nlp/summarization``.
-
 
 Multilingual Support
 ====================
@@ -33,13 +28,22 @@ Simplified Chinese    zh-CN
 Indonesian            id-XX
 ====================  =====
 
-Inference
+Callback URLs
+=============
+
+The Summarization API uses callback URLs in some of its endpoints. These endpoints can take longer to execute, and the callback URL allows the process to run in the background and return the answer to you when it is finished.
+
+For testing these endpoints, two resources that are available to provide testing URLs as your callback URL are `webhook.site <https://webhook.site/>`_ and `ngrok <https://ngrok.com/>`_.
+
+In this tutorial, we will use a webhook.site URL in the examples.
+
+API Usage
 ==========
 
-The Sumamrization API supports two types of transcript summarization, short and long. The short summary method is intended to summarize a single utterance from a transcript, to provide fine-grained summarization of the transcript. The long summary method is intended to summarize the entire transcript in large chunks, to provide an overall summary of the transcript.
+The Summarization API supports two types of transcript summarization, short and long. The short summary method is intended to summarize a single utterance from a transcript, to provide fine-grained summarization of the transcript. The long summary method is intended to summarize the entire transcript in large chunks, to provide an overall summary of the transcript.
 
-Short Summary
---------------
+POST /short/summarize
+---------------------
 
 The short summary model produces a summary of a single turn of a transcript.
 
@@ -68,8 +72,8 @@ A successful response returns the summary of the transcription in the following 
 .. NOTE:: As summaries of extremely short utterances are not informative, if the utterances is shorter than 5 words, the summarizer will return an empty summary. To avoid going over the model's character limit, the summarizer will also truncate any utterance longer than 700 words.
 
 
-Long Summary
--------------
+POST /long/summarize
+--------------------
 
 The long summary model produces a summary of the largest possible segment of a transcript. 
 
@@ -79,12 +83,12 @@ This process is called with the following POST request:
 
     POST https://seachat-backstage.seasalt.ai/summarization/{lang_code}/long/summarize
 
-The required request body for inference contains the entire transcipt in the following format, with speakers and utterances in the ``data`` list. The ``url`` element is the callback url where the final summary will be returned.
+The required request body for inference contains the entire transcript in the following format, with speakers and utterances in the ``data`` list. The ``url`` element is the callback URL where the final summary will be returned.
 
 .. code-block:: JSON
     
     {
-        "url": "http://127.0.0.1:5002/result",
+        "url": "https://webhook.site/3c95b604-4243-4d15-b5ce-a79e18dec3e7",
         "data": [
             {
                 "speaker": [
@@ -115,7 +119,7 @@ The required request body for inference contains the entire transcipt in the fol
 
 .. IMPORTANT:: As it takes a comparatively long time to summarize a long segment, this is implemented as a callback. A successful response will return a success message of the process starting, not a summary directly.
 
-The transcipt will be automatically segmentented into the largest chunks possible under 300 words. The callback function will then start producing summaries. When the summarization is complete, a PUT request will be sent with the generated summary to the callback url provided in the original request body.
+The transcript will be automatically segmented into the largest chunks possible under 300 words. The callback function will then start producing summaries. When the summarization is complete, a PUT request will be sent with the generated summary to the callback url provided in the original request body.
 
 The final summaries will appear in the following JSON format:
 
