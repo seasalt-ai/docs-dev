@@ -44,7 +44,7 @@ Welcome to SeaChat's Master Documentation!
 
    SeaWord <nlp/readme>
    Summarization API Tutorial <nlp/sum_tutorial>
-   Topic Extraction API Tutorial <nlp/topic_tutorial>
+   Topic Prediction API Tutorial <nlp/topic_tutorial>
    Action Extraction API Tutorial <nlp/action_tutorial>
    Cross Lingual NER API Tutorial <nlp/xlingualNER_tutorial>
    Machine Reading API Tutorial <nlp/mr_tutorial>
@@ -59,6 +59,16 @@ Welcome to SeaChat's Master Documentation!
    SeaVoice SDK (Python) <speech/seavoice_sdk_python_tutorial>
    SeaVoice RESTful APIs <speech/seavoice_restful_apis_tutorial>
 
+.. toctree::
+   :maxdepth: 3
+   :glob:
+   :titlesonly:
+   :caption: NearMe
+
+   NearMe README <nearme/readme>
+   NearMe Data Analytics Tutorial <nearme/data_analytics_tutorial>
+
+ 
 .. toctree::
    :maxdepth: 2
    :glob:
