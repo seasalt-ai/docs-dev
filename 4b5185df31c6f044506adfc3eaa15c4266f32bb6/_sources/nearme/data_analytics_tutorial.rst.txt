@@ -5,12 +5,9 @@ Data Analytics with Google Data Studio Tutorial
 ==================================
 
 This tutorial will walk through how to use Data Studio to present key insights for businesses and how to easily customize the report based on different data.
-<<<<<<< HEAD
 The data for `Seattle businesses <https://drive.google.com/file/d/1-RvHSU0JnEZNHSoRMqQts_LvFRZ7tEZk/view?usp=sharing>`_ , `Vancouver businesses <https://drive.google.com/file/d/146ojdCZiVLVTxoVjvL7vPfhNaxpQ_fSt/view?usp=sharing>`_ and Singapore businesses `other categories <https://drive.google.com/file/d/11xeEXY2hPO5noDUbTpni0aseIGrYYILP/view?usp=sharing>`_ and `restaurant category <https://drive.google.com/file/d/1uDIWakdEHobIjm_TevZWuenMWF3u_CWb/view?usp=sharing>`_ are in the drive.
 
 Here are the Data Analytics report for `Seattle <https://datastudio.google.com/reporting/72ec276d-f15a-4976-8a99-ed1183868453>`_ , `Vancouver <https://datastudio.google.com/reporting/3e6f3fa8-2aa6-4e03-9651-ca6391124d12>`_ , and `Singapore <https://datastudio.google.com/u/1/reporting/af8cd60b-21f8-4c6c-985f-059362a4e101/page/p_4ft2tl1mpc>`_ . 
-=======
->>>>>>> a01cfe0af8fddf46341a302627e4f7f21f1fa1c7
 
 .. contents:: Table of Contents
     :local:
@@ -29,7 +26,6 @@ This data analytics pipeline include two steps:
 
 Step 1. Preprocess JSON file
 
-<<<<<<< HEAD
 Firstly, we have to preprocess the JSON file and generate csv files. You can download the JSON files from the Google Drive. Then, we use the `generate_csv_files.py` script in the `data-studio-analytics` folder of NearMe repo. To run the script, please follow the steps below. 
 
 
@@ -39,9 +35,6 @@ Firstly, we have to preprocess the JSON file and generate csv files. You can dow
    $ ./generate_csv_files.py [path to input file] [path to output file for map and attributes] [path to output file for time series]
 
 This script will generate two csv files: 1) one csv file that consists of information for data studio map and attributes graph 2) one csv file specifically for time series graph. The CSV files are divided into two files due to file size limit of 100 MB on Data Studio.
-=======
-Firstly, we have to preprocess the JSON file and generate csv files. You can download the JSON files from the Google Drive. Then, we use the `generate_csv_files.py` script in the `data-studio-analytics` folder of NearMe repo. To run the script, open the script and change the input path, filename, and output path according to your working directory. This script will generate two csv files: 1) one csv file that consists of information for data studio map and attributes graph 2) one csv file specifically for time series graph. The CSV files are divided into two files due to file size limit of 100 MB on Data Studio.
->>>>>>> a01cfe0af8fddf46341a302627e4f7f21f1fa1c7
 
 Step 2. Upload the CSV files to the Google Data Studio
 
