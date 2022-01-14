@@ -65,7 +65,7 @@ Welcome to SeaChat's Master Documentation!
    :titlesonly:
    :caption: NearMe
 
-   NearMe README <nearme/readme>
+   NearMe <nearme/readme>
    NearMe Data Analytics Tutorial <nearme/data_analytics_tutorial>
 
  
