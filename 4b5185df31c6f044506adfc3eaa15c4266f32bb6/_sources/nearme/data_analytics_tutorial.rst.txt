@@ -18,7 +18,7 @@ Here are the Data Analytics report for `Seattle <https://datastudio.google.com/r
 Introduction
 ============
 
-The purpose of this data analytics pipeline with Google Data Studio is to be able to generate insights from any big JSON file for the sales team. The current JSON files that we have, consists of information about businesses in Seattle and Singapore. These information include name of businesses, latitude, longitude, website, rating, reviews, attributes, and more.
+The purpose of this data analytics pipeline with Google Data Studio is to be able to generate insights from any big JSON file for the sales team. The current JSON files that we have consist of information about businesses in Seattle, Vancouver, and Singapore. This information includes names of businesses, latitude, longitude, website, ratings, reviews, attributes, and more.
 
 Implementation
 --------------
