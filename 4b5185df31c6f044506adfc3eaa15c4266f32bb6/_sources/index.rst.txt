@@ -60,6 +60,16 @@ Welcome to SeaChat's Master Documentation!
    SeaVoice RESTful APIs <speech/seavoice_restful_apis_tutorial>
 
 .. toctree::
+   :maxdepth: 3
+   :glob:
+   :titlesonly:
+   :caption: NearMe
+
+   NearMe <nearme/readme>
+   NearMe Data Analytics Tutorial <nearme/data_analytics_tutorial>
+
+ 
+.. toctree::
    :maxdepth: 2
    :glob:
    :titlesonly:

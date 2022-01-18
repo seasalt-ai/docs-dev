@@ -90,6 +90,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../speech/seavoice_sdk_python_tutorial.html">SeaVoice SDK (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../speech/seavoice_restful_apis_tutorial.html">SeaVoice RESTful APIs</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">NearMe</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../nearme/readme.html">NearMe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nearme/data_analytics_tutorial.html">NearMe Data Analytics Tutorial</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">SeaChat-report</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../report/index.html">Welcome to SeaChat-report’s documentation!</a></li>
@@ -123,49 +128,49 @@
              
   <section id="domain-example">
 <span id="bot-domain"></span><h1>Domain Example<a class="headerlink" href="#domain-example" title="Permalink to this headline"></a></h1>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">intents</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">greet</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">faq</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">display_menu</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">select_item</span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">intents</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">greet</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">faq</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">display_menu</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">select_item</span><span class="w"></span>
 
-<span class="nt">entities</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">item</span>
+<span class="nt">entities</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">item</span><span class="w"></span>
 
-<span class="nt">slots</span><span class="p">:</span>
-  <span class="nt">item</span><span class="p">:</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">text</span>
+<span class="nt">slots</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">item</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">text</span><span class="w"></span>
 
-<span class="nt">responses</span><span class="p">:</span>
-  <span class="nt">utter_default</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">text</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">I&#39;m sorry, I didn&#39;t understand that.</span> 
+<span class="nt">responses</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">utter_default</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">I&#39;m sorry, I didn&#39;t understand that.</span><span class="w"> </span>
 
-  <span class="nt">utter_display_menu</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">text</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Here&#39;s what&#39;s on the menu; Americano, House Coffee, Decaf Coffee, Breakfast Combo, Muffin, Croissant, Bagel, and Panini.</span>
+<span class="w">  </span><span class="nt">utter_display_menu</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Here&#39;s what&#39;s on the menu; Americano, House Coffee, Decaf Coffee, Breakfast Combo, Muffin, Croissant, Bagel, and Panini.</span><span class="w"></span>
 
-  <span class="nt">utter_select_item</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">text</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Okay, you want to select an item.</span>
+<span class="w">  </span><span class="nt">utter_select_item</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Okay, you want to select an item.</span><span class="w"></span>
 
-  <span class="nt">utter_added_item</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">text</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Okay, I&#39;ll add a {item} to you cart.</span>
+<span class="w">  </span><span class="nt">utter_added_item</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Okay, I&#39;ll add a {item} to you cart.</span><span class="w"></span>
 
-  <span class="nt">utter_no_item_selected</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">text</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">You didn&#39;t specify what item you want.</span>
+<span class="w">  </span><span class="nt">utter_no_item_selected</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">You didn&#39;t specify what item you want.</span><span class="w"></span>
 
-  <span class="nt">utter_greet</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">text</span><span class="p">:</span> <span class="s">&quot;Hey!</span><span class="nv"> </span><span class="s">What</span><span class="nv"> </span><span class="s">can</span><span class="nv"> </span><span class="s">I</span><span class="nv"> </span><span class="s">get</span><span class="nv"> </span><span class="s">you?&quot;</span>
+<span class="w">  </span><span class="nt">utter_greet</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hey!</span><span class="nv"> </span><span class="s">What</span><span class="nv"> </span><span class="s">can</span><span class="nv"> </span><span class="s">I</span><span class="nv"> </span><span class="s">get</span><span class="nv"> </span><span class="s">you?&quot;</span><span class="w"></span>
 
-<span class="nt">actions</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_faq</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">action_session_start</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">action_display_menu</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">action_validate_item</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">action_add_item</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">action_display_cart</span>
+<span class="nt">actions</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">utter_faq</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action_session_start</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action_display_menu</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action_validate_item</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action_add_item</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action_display_cart</span><span class="w"></span>
 
-<span class="nt">session_config</span><span class="p">:</span>
-  <span class="nt">session_expiration_time</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">60</span>
-  <span class="nt">carry_over_slots_to_new_session</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">session_config</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">session_expiration_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span><span class="w"></span>
+<span class="w">  </span><span class="nt">carry_over_slots_to_new_session</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 </pre></div>
 </div>
 </section>

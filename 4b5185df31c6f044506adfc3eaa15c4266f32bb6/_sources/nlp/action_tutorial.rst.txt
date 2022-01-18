@@ -17,7 +17,7 @@ Introduction
 The purpose of the Action Extraction system is to create short summaries of action items from meeting transcriptions.
 The result of running the Action Extraction over a meeting transcription is a list of commands, suggestions, statements of intent, and other actionable segments that can be presented as to-dos or follow-ups for the meeting participants.
 
-The endpoint for the Action Extraction API is ``https://seachat-backstage.seasalt.ai/actions``.
+The endpoint for the Action Extraction API is ``https://seaword.seasalt.ai/actions``.
 
 
 Multilingual Support
@@ -57,14 +57,13 @@ The no-callback process is called with the following POST request:
 
 .. code-block:: bash
 
-    POST https://seachat-backstage.seasalt.ai/actions/{lang-code}/extract_no_callback
+    POST https://seaword.seasalt.ai/actions/{lang_code}/extract_no_callback?access_token={api_key}
 
 The required request body for no-callback action extraction is in the following format:
 
 .. code-block:: JSON
 
     {
-        "url":"https://webhook.site/3c95b604-4243-4d15-b5ce-a79e18dec3e7",
         "data":[
             {
                 "speaker":[
@@ -96,6 +95,7 @@ The required request body for no-callback action extraction is in the following 
 A successful response will have the following output:
 
 .. code-block:: JSON
+
     {
         "action_items":[
             {
@@ -159,7 +159,7 @@ The callback process is called with the following POST request:
 
 .. code-block:: bash
 
-    POST https://seachat-backstage.seasalt.ai/actions/{lang_code}/extract
+    POST https://seaword.seasalt.ai/actions/{lang_code}/extract?access_token={api_key}
 
 
 The required request body for action extraction with callback is in the following format:
@@ -206,6 +206,7 @@ Once the Action Extraction has been performed on the full transcript, a POST req
 The format of the final result is as follows:
 
 .. code-block:: JSON
+
     {
         "action_items":[
             {

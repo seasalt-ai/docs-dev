@@ -90,6 +90,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../speech/seavoice_sdk_python_tutorial.html">SeaVoice SDK (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../speech/seavoice_restful_apis_tutorial.html">SeaVoice RESTful APIs</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">NearMe</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../nearme/readme.html">NearMe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nearme/data_analytics_tutorial.html">NearMe Data Analytics Tutorial</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">SeaChat-report</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../report/index.html">Welcome to SeaChat-report’s documentation!</a></li>
@@ -123,29 +128,29 @@
              
   <section id="cart-config-example">
 <span id="cart-config"></span><h1>Cart Config Example<a class="headerlink" href="#cart-config-example" title="Permalink to this headline"></a></h1>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">MENU_PATHS</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="s">&#39;./data/menu.json&#39;</span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">MENU_PATHS</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;./data/menu.json&#39;</span><span class="w"></span>
 
-<span class="c1"># Thresholds for matching/suggesting with fuzzywuzzy and elasticsearch</span>
-<span class="nt">FUZZY_MATCH_THRESH</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">85</span>  <span class="c1"># constant for fuzzy matching threshold</span>
-<span class="nt">FUZZY_SUGGEST_THRESH</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50</span>  <span class="c1"># constant for fuzzy matching similar items</span>
-<span class="nt">ES_MATCH_THRESH</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3.5</span>  <span class="c1"># constant for ItemSearch matching threshold</span>
-<span class="nt">ES_SUGGEST_THRESH</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.8</span>  <span class="c1"># constant for ItemSearch matching similar items</span>
-<span class="nt">ES_UNIQUE_THRESH</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.3</span> <span class="c1"># a constant for determining if a top result is unique enough to be an exact match</span>
+<span class="c1"># Thresholds for matching/suggesting with fuzzywuzzy and elasticsearch</span><span class="w"></span>
+<span class="nt">FUZZY_MATCH_THRESH</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">85</span><span class="w">  </span><span class="c1"># constant for fuzzy matching threshold</span><span class="w"></span>
+<span class="nt">FUZZY_SUGGEST_THRESH</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span><span class="w">  </span><span class="c1"># constant for fuzzy matching similar items</span><span class="w"></span>
+<span class="nt">ES_MATCH_THRESH</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.5</span><span class="w">  </span><span class="c1"># constant for ItemSearch matching threshold</span><span class="w"></span>
+<span class="nt">ES_SUGGEST_THRESH</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.8</span><span class="w">  </span><span class="c1"># constant for ItemSearch matching similar items</span><span class="w"></span>
+<span class="nt">ES_UNIQUE_THRESH</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.3</span><span class="w"> </span><span class="c1"># a constant for determining if a top result is unique enough to be an exact match</span><span class="w"></span>
 
-<span class="c1"># categories of attributive options that should precede the item name</span>
-<span class="nt">ATTRIBUTIVE_OPTIONS</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">size</span>
+<span class="c1"># categories of attributive options that should precede the item name</span><span class="w"></span>
+<span class="nt">ATTRIBUTIVE_OPTIONS</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">size</span><span class="w"></span>
 
-<span class="c1"># host and port info for elasticsearch service</span>
-<span class="nt">ES_TRY_LOCAL_FIRST</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="c1"># On the k8s cluster, login/secret will be set automatically.</span>
-<span class="c1"># ES_PORT: 9200</span>
-<span class="c1"># ES_HOST: elastic.seasalt.ai</span>
-<span class="c1"># ES_LOGIN: elastic</span>
-<span class="c1"># ES_SECRET: J248bGk1rg7zOhl5Tq404ut6</span>
-<span class="nt">ES_MULTI_MATCH_TYPE</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cross_fields</span>  <span class="c1"># by default it&#39;s best_fields</span>
-<span class="nt">ES_MULTI_MATCH_FIELDS</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;aliases&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;modifier_names&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;tags&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;categories&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;name&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;ingredients&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;description&quot;</span><span class="p p-Indicator">]</span>
+<span class="c1"># host and port info for elasticsearch service</span><span class="w"></span>
+<span class="nt">ES_TRY_LOCAL_FIRST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
+<span class="c1"># On the k8s cluster, login/secret will be set automatically.</span><span class="w"></span>
+<span class="c1"># ES_PORT: 9200</span><span class="w"></span>
+<span class="c1"># ES_HOST: elastic.seasalt.ai</span><span class="w"></span>
+<span class="c1"># ES_LOGIN: elastic</span><span class="w"></span>
+<span class="c1"># ES_SECRET: J248bGk1rg7zOhl5Tq404ut6</span><span class="w"></span>
+<span class="nt">ES_MULTI_MATCH_TYPE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cross_fields</span><span class="w">  </span><span class="c1"># by default it&#39;s best_fields</span><span class="w"></span>
+<span class="nt">ES_MULTI_MATCH_FIELDS</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;aliases&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;modifier_names&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;tags&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;categories&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;ingredients&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;description&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>

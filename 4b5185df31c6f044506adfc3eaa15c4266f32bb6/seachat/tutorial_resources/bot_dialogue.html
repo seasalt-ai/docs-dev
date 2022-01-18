@@ -90,6 +90,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../speech/seavoice_sdk_python_tutorial.html">SeaVoice SDK (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../speech/seavoice_restful_apis_tutorial.html">SeaVoice RESTful APIs</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">NearMe</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../nearme/readme.html">NearMe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nearme/data_analytics_tutorial.html">NearMe Data Analytics Tutorial</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">SeaChat-report</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../report/index.html">Welcome to SeaChat-report’s documentation!</a></li>
@@ -123,51 +128,51 @@
              
   <section id="dialogue-yml-example">
 <span id="bot-dialogue"></span><h1>Dialogue.yml Example<a class="headerlink" href="#dialogue-yml-example" title="Permalink to this headline"></a></h1>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">$[greet]</span><span class="p p-Indicator">:</span>
-  <span class="nt">rank_score</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">100</span>
-  <span class="nt">conditions</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">INTENT.name == &#39;greet&#39;</span>
-  <span class="nt">actions</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_greet</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">action_listen</span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">$[greet]</span><span class="p p-Indicator">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">rank_score</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w"></span>
+<span class="w">  </span><span class="nt">conditions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INTENT.name == &#39;greet&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">actions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">utter_greet</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action_listen</span><span class="w"></span>
 
-<span class="l l-Scalar l-Scalar-Plain">$[display menu]</span><span class="p p-Indicator">:</span>
-  <span class="nt">conditions</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">INTENT.name == &#39;display_menu&#39;</span>
-  <span class="nt">actions</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">action_display_menu</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">action_listen</span>
+<span class="l l-Scalar l-Scalar-Plain">$[display menu]</span><span class="p p-Indicator">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">conditions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INTENT.name == &#39;display_menu&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">actions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action_display_menu</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action_listen</span><span class="w"></span>
 
-<span class="l l-Scalar l-Scalar-Plain">$[select item]</span><span class="p p-Indicator">:</span>
-  <span class="nt">conditions</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">INTENT.name == &#39;select_item&#39;</span>
-  <span class="nt">actions</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">action_validate_item</span>
-  <span class="nt">connections</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">$[add item]</span><span class="p p-Indicator">:</span>
-        <span class="nt">direct_connection</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-        <span class="nt">conditions</span><span class="p">:</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">SLOTS.item is not None</span>
-        <span class="nt">actions</span><span class="p">:</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">action_add_item</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">action_display_cart</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">action_listen</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">$[add item no item]</span><span class="p p-Indicator">:</span>
-        <span class="nt">direct_connection</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-        <span class="nt">conditions</span><span class="p">:</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">SLOTS.item is None</span>
-        <span class="nt">actions</span><span class="p">:</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_no_item_selected</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">action_display_menu</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">action_listen</span>
+<span class="l l-Scalar l-Scalar-Plain">$[select item]</span><span class="p p-Indicator">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">conditions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INTENT.name == &#39;select_item&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">actions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action_validate_item</span><span class="w"></span>
+<span class="w">  </span><span class="nt">connections</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$[add item]</span><span class="p p-Indicator">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">direct_connection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">        </span><span class="nt">conditions</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SLOTS.item is not None</span><span class="w"></span>
+<span class="w">        </span><span class="nt">actions</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action_add_item</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action_display_cart</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action_listen</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$[add item no item]</span><span class="p p-Indicator">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">direct_connection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">        </span><span class="nt">conditions</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SLOTS.item is None</span><span class="w"></span>
+<span class="w">        </span><span class="nt">actions</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">utter_no_item_selected</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action_display_menu</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action_listen</span><span class="w"></span>
 
-<span class="l l-Scalar l-Scalar-Plain">$[faq]</span><span class="p p-Indicator">:</span>
-  <span class="nt">rank_score</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">100</span>
-  <span class="nt">conditions</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">INTENT.name == &#39;faq&#39;</span>
-  <span class="nt">actions</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_faq</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">action_listen</span>
+<span class="l l-Scalar l-Scalar-Plain">$[faq]</span><span class="p p-Indicator">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">rank_score</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w"></span>
+<span class="w">  </span><span class="nt">conditions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INTENT.name == &#39;faq&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">actions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">utter_faq</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action_listen</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
