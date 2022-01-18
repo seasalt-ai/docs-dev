@@ -8,20 +8,19 @@ SeaWord NLP Overview
     :local:
     :depth: 3
 
-The purpose of this tutorial is to demonstrate how the SeaChat meeting RESTFul APIs can be used to retrieve meeting analytics. In this tutorial we will walk-through:
+The purpose of this tutorial is to demonstrate how the SeaWord APIs can be used to extract information from text. In this tutorial we will walk-through:
     - How to use the Summarization API to generate short and long summaries from a meeting transcript
-    - How to use the Topic Prediction API to predict topics from meeting transcript
+    - How to use the Topic Prediction API to predict topics from a meeting transcript
     - How to use the Action Extraction API to extract and summarize actionable items from a meeting transcript
+    - How to use the Cross Lingual NER API to extract entities from a given sentence
+    - How to use the Machine Reading API to answer questions from a given text
 
-The end result will be a robust set of meeting analytics.
-
-The code for these systems can be found in the Seasalt.ai SeaWord repository.
+The endpoints of the SeaWord API call for an API key. For these endpoints, please use ``6kx8koGGsGJXfarD``.
 
 Summarization API
 =================
 
 The Summarization API uses mBART-50 based summarization models to generate summaries of single turn utterances and full transcripts in multiple languages.
-The tutorial will walk through the different API calls to access these models.
 
 :ref:`Summarization Tutorial ---> <sum_tutorial>`
 
@@ -49,6 +48,6 @@ The Cross Lingual NER API uses one model to extract 30+ common entities from ove
 Machine Reading API
 ===================
 
-The Machine Reading API performs extracting machine reading to answer questions given a context text. The tutorial will walk through the API calls to access this model.
+The Machine Reading API performs extractive machine reading to answer questions given a context text.
 
 :ref:`Machine Reading Tutorial ---> <mr_tutorial>`
