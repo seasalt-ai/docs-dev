@@ -128,65 +128,65 @@
              
   <section id="config-example">
 <span id="bot-config"></span><h1>Config Example<a class="headerlink" href="#config-example" title="Permalink to this headline"></a></h1>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configuration for Rasa NLU.</span><span class="w"></span>
-<span class="c1"># https://rasa.com/docs/rasa/nlu/components/</span><span class="w"></span>
-<span class="nt">language</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">en</span><span class="w"></span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configuration for Rasa NLU.</span>
+<span class="c1"># https://rasa.com/docs/rasa/nlu/components/</span>
+<span class="nt">language</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">en</span>
 
-<span class="nt">importers</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seachat_plugins.importers.faq_importer.FAQImporter</span><span class="w"></span>
-<span class="w">    </span><span class="nt">faq_paths</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/faq.csv</span><span class="w"></span>
-<span class="w">    </span><span class="nt">augment_with_synonyms</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
-<span class="w">    </span><span class="nt">timezone</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">America/Los_Angeles</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RasaFileImporter</span><span class="w"></span>
+<span class="nt">importers</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">seachat_plugins.importers.faq_importer.FAQImporter</span>
+    <span class="nt">faq_paths</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">data/faq.csv</span>
+    <span class="nt">augment_with_synonyms</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="nt">timezone</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">America/Los_Angeles</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">RasaFileImporter</span>
 
-<span class="nt">pipeline</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WhitespaceTokenizer</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RegexFeaturizer</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LexicalSyntacticFeaturizer</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CountVectorsFeaturizer</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CountVectorsFeaturizer</span><span class="w"></span>
-<span class="w">    </span><span class="nt">analyzer</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;char_wb&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">min_ngram</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
-<span class="w">    </span><span class="nt">max_ngram</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DIETClassifier</span><span class="w"></span>
-<span class="w">    </span><span class="nt">epochs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EntitySynonymMapper</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seachat_plugins.nlu.selectors.elastic_selector.ElasticSelector</span><span class="w"></span>
-<span class="w">    </span><span class="nt">retrieval_intent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">faq</span><span class="w"></span>
-<span class="w">    </span><span class="nt">batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2048</span><span class="w"></span>
-<span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">text</span><span class="w"></span>
-<span class="w">    </span><span class="nt">es_indexing</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">analyzer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard</span><span class="w"></span>
-<span class="w">      </span><span class="nt">index_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tutorial_faq</span><span class="w"></span>
-<span class="w">      </span><span class="c1"># On the k8s cluster, login/secret will be set automatically.</span><span class="w"></span>
-<span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"></span>
-<span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9200</span><span class="w"></span>
-<span class="w">    </span><span class="nt">bert_client</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
-<span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bert-as-service</span><span class="w"></span>
-<span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5555</span><span class="w"></span>
-<span class="w">      </span><span class="nt">port_out</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5556</span><span class="w"></span>
-<span class="w">    </span><span class="nt">eval</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
-<span class="w">      </span><span class="nt">metric</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">map</span><span class="w"></span>
-<span class="w">      </span><span class="nt">N</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
-<span class="w">    </span><span class="nt">reranker</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+<span class="nt">pipeline</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">WhitespaceTokenizer</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">RegexFeaturizer</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">LexicalSyntacticFeaturizer</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">CountVectorsFeaturizer</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">CountVectorsFeaturizer</span>
+    <span class="nt">analyzer</span><span class="p">:</span> <span class="s">&quot;char_wb&quot;</span>
+    <span class="nt">min_ngram</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+    <span class="nt">max_ngram</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DIETClassifier</span>
+    <span class="nt">epochs</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">100</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">EntitySynonymMapper</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">seachat_plugins.nlu.selectors.elastic_selector.ElasticSelector</span>
+    <span class="nt">retrieval_intent</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">faq</span>
+    <span class="nt">batch_size</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2048</span>
+    <span class="nt">method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">text</span>
+    <span class="nt">es_indexing</span><span class="p">:</span>
+      <span class="nt">analyzer</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">standard</span>
+      <span class="nt">index_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial_faq</span>
+      <span class="c1"># On the k8s cluster, login/secret will be set automatically.</span>
+      <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">localhost</span>
+      <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9200</span>
+    <span class="nt">bert_client</span><span class="p">:</span>
+      <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+      <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bert-as-service</span>
+      <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5555</span>
+      <span class="nt">port_out</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5556</span>
+    <span class="nt">eval</span><span class="p">:</span>
+      <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+      <span class="nt">metric</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">map</span>
+      <span class="nt">N</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+    <span class="nt">reranker</span><span class="p">:</span>
+      <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
 
-<span class="c1"># Configuration for Rasa Core.</span><span class="w"></span>
-<span class="c1"># https://rasa.com/docs/rasa/core/policies/</span><span class="w"></span>
-<span class="nt">policies</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seachat_plugins.core.policy.ngchat.ngChatPolicy</span><span class="w"></span>
-<span class="w">    </span><span class="nt">nlu_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.20</span><span class="w"></span>
-<span class="w">    </span><span class="nt">visual</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">visualization_directory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./visual</span><span class="w"></span>
-<span class="w">      </span><span class="nt">output_static_visualization</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
-<span class="w">      </span><span class="nt">vega_spec_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./visual/flow_data.json</span><span class="w"></span>
-<span class="w">      </span><span class="nt">output_at_each_turn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
-<span class="w">      </span><span class="nt">output_live_update</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
-<span class="w">      </span><span class="nt">output_vega</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
-<span class="w">      </span><span class="nt">output_dot</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+<span class="c1"># Configuration for Rasa Core.</span>
+<span class="c1"># https://rasa.com/docs/rasa/core/policies/</span>
+<span class="nt">policies</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">seachat_plugins.core.policy.ngchat.ngChatPolicy</span>
+    <span class="nt">nlu_threshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">.20</span>
+    <span class="nt">visual</span><span class="p">:</span>
+      <span class="nt">visualization_directory</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">./visual</span>
+      <span class="nt">output_static_visualization</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+      <span class="nt">vega_spec_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">./visual/flow_data.json</span>
+      <span class="nt">output_at_each_turn</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+      <span class="nt">output_live_update</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+      <span class="nt">output_vega</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+      <span class="nt">output_dot</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
 </pre></div>
 </div>
 </section>
