@@ -35,10 +35,13 @@ The following is the redaction UI interface.
    :height: 600
 
 1. Upload Documents
+
 The first step is to upload your text data. You can either copy and paste your text data directly in the text box. Or, upload a csv, excel, or json file with a list of text data entries.
 
 2. Choose Redaction Items
+
 Next, you can now choose the redaction items. Currently, we support classification and masking of the following personally identifiable and sensitive information:
+    
     - Name
     - Social Security Number
     - Address
@@ -51,11 +54,14 @@ Next, you can now choose the redaction items. Currently, we support classificati
     - Resident Permit Number (Traditional Chinese only)
 
 3. Choose Redaction Format
+
 Currently, we support the following redaction format. The redacted texts will be labeled and highlighted in the respective format in the final Review section.
+    
     - No mask (Label the text, and show original text)
     - Full mask (Label the text, and replace original text with `x`)
     - Tail mask (Label the text, and replace first letter with `x`)
     - Mirror mask (Label the text, and replace the second half of text with the first half)
 
 4. Review Results
+
 Review the redacted text in this section.

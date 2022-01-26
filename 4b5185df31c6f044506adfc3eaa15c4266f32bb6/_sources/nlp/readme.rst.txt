@@ -51,3 +51,10 @@ Machine Reading API
 The Machine Reading API performs extractive machine reading to answer questions given a context text.
 
 :ref:`Machine Reading Tutorial ---> <mr_tutorial>`
+
+Redaction Service
+===================
+
+The Redaction Service performs personally identifiable and sensitive information classification and redaction given a context text.
+
+:ref:`Redaction Tutorial ---> <redaction_tutorial>`
