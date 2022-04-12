@@ -318,7 +318,7 @@ Now, put everything together and run the example:
 
     if __name__ == "__main__":
         SEASALT_ACCOUNT = "xxxxxxxxx"
-	PASSWORD = "xxxxxxxx"
+        PASSWORD = "xxxxxxxx"
         speech_config = speechsdk.SpeechConfig(
             account_id=SEASALT_ACCOUNT,
             password=PASSWORD,

@@ -1,0 +1,143 @@
+.. _nearme_bot_analytics:
+
+==================================
+NearMe Bot Query Analytics 
+==================================
+
+This page will look at how we provide detailed conversation analytics to users of NearMe.
+
+.. contents:: Table of Contents
+    :local:
+    :depth: 3
+
+
+Capturing Data
+==============
+
+In the message routing section, we already went over how we store conversation data to the ``nearme_events`` table.
+General conversation data is great for extracting information like how many unique users talked to the bot, how many queries there were in a certain time frame, and how long the average conversation was.
+However, this data can't tell us much about how well the bot performed or how satisfied the user was with the answers.
+
+In order to provide more detailed analytics about response quality, we created a new table to store information about problematic responses.
+In particular, we currently store data about three specific kinds of bot responses.
+
+1. "Missing attribute" FAQs: 
+This is a situation where the bot responds with a generated FAQ response based on a GBP attribute, but the business owner didn't specify the attribute value.
+For example, if a user asks: "do you serve alcohol?", the bot may recognize that the user is asking about the Google attribute "serves alcohol".
+However, if the business owner did not fill in that attribute on their Google Business Profile, the bot doesn't know if it's applicable to that business or not.
+So, the bot will respond with something like "I think you asked about 'serves alcohol', but I couldn't find anything about that...".
+In this case, we store the "missing attribute" FAQs so that we can bring frequently asked attributes to the business owner's attention, and prompt them to update their Google Profile.
+
+2. Unhelpful MR Responses:
+After the bot returns a response from the machine reading system, it always asks a follow up question asking the user if the response was helpful or not.
+If the user ever responds "No" to this survey, we store the data so that business owners can tune their reviews and additional context to answer the question better.
+
+3. Fallback:
+In the worst case, the bot will have no confident response at all, and will respond with something like "I'm not sure I understood that...".
+We store these queries so that the business owner can fill in the gaps by adding new custom FAQs or additional context.
+
+Within the bot, each time it sends a response to the user, it is checking for any of these three cases.
+If a bad response is found, the bot's action server will submit a request to the endpoint ``POST https://seachat.seasalt.ai/bot-actions/nearme_bots/{bot_id}/analytics`` in order to save that data to the database.
+
+The database has the following format: 
+
+**nearme_query_analytics**
+
+.. list-table::
+   :widths: 25, 10, 50, 25
+   :header-rows: 1
+
+   * - Column
+     - Type
+     - Description
+     - Example
+   * - bot_id
+     - str 
+     - The unique bot ID assigned by the backend API
+     - 91b7d5b9-d071-4da9-ab7d-8302eed441f6
+   * - conversation_id
+     - str 
+     - The unique ID for the conversation provided by GBM. One user/agent pair always has the same ID.
+     - fa34a02c-8e67-47af-b241-5499a978b7be
+   * - timestamp 
+     - float 
+     - The timestamp of the event
+     - 1642635744.4679022
+   * - query
+     - str 
+     - The original text query from the user
+     - Do you sell alcohol?
+   * - response_type 
+     - str 
+     - The response method of the bot: faq, mr, or fallback
+     - faq
+   * - bot_response 
+     - str 
+     - The text response from the bot 
+     - I think you asked about "sells alcohol", but I couldn't find a good answer.
+   * - attribute 
+     - str 
+     - The attribute of the FAQ - only provided when ``response_type`` == ``faq``
+     - sells_alcohol
+   * - has_attribute
+     - bool 
+     - Whether or not the attribute info was filled in for the business in Google Business Profile - only provided when ``response_type`` == ``faq``
+     - False
+   * - helpful_response
+     - bool 
+     - Whether or not the user thought the response was helpful - only provided when ``response_type`` == ``mr``
+     - True
+   * - processed 
+     - bool 
+     - Whether or not the issue with the query has been addressed by the business owner
+     - True
+
+
+Generating Analytics Reports
+============================
+
+Using the conversation data captured, we can provide real time key metrics and insights for NearMe users. NearMe Analytics dashboard is a self-contained service that can be managed by NLP Team and accessed on demand by Front/Back-end teams.
+
+Implementation - Streamlit
+---------------------------
+
+We choose `Streamlit <https://streamlit.io/>`_ to host the NearMe analytics application. To learn more about how to get started with Streamlit, please check out this `Seminar <https://docs.google.com/presentation/d/12M-D3Bni_yQhiGy89Q6lMsWenr7-fALM9lOzfrp3LkI/edit?usp=sharing>`_. Following are the implementation details for the NearMe Analytics Dashboard:
+
+.. code-block::
+
+    # Project Structure
+    | customers_analytics
+        | .streamlit
+            | config.toml
+        | app.py                  
+        | queries.py
+        | Dockerfile
+        | start.sh
+
+
+* Using analytics database and SQL queries
+To have real time analytics on demand, we decide to extract useful information from bot logs and set aside a database for analytics. Having a separate database for analytics allows NLP to add more useful information quickly without interfering with production and other team's workflow. The database name is ``nlp-{environment}``, for example, ``nlp-dev``. After consolidating the SQL queries for the metrics we want to show, we organize the queries into functions that we can use on demand. We can repeatedly run these queries with different ``bot_id`` and ``date range``. All queries are currently saved in ``queries.py``.
+
+* Real time rendering
+The dashboard will rerender whenever 1) a user opens the analytics app 2) a user changes date range for analytics data. This allows users to see insights for any specific time range. Internally, this is also useful for NLP Team to check the metrics for any bot given a bot id.
+
+* Making graphs 
+We primarily use the python package, ``altair``, to make the analytics graphs. It is possible to use other common Python visualization libraries. The graphs will rerender as soon as the app receives new data. It is possible to customize all the graphs (fonts, size, position, orientation etc). Most customization tricks can be found at `altair documentation <https://altair-viz.github.io/>`_.
+
+* App Theme and Design
+Since one goal is to have seamless integration with NearMe Portal, we customize a Seasalt theme for Analytics Dashboard. Please check out the seminar for details on how to add a theme to streamlit app. The theme details are stored in ``.streamlit/config.toml``.
+
+* Passing in query parameter in URL
+
+We want to use one single service for all the bot analytics so it is important that we can provide contexts such as ``bot_id`` to render the Analytics Dashboard accordingly. If we need to pass in more contexts to the app when opening the Dashboard, we can just append more parameters to the URL like how you'd add query parameter strings in REST API requests, and then just adjust the Python code accordingly to parse out the query parameters.
+
+.. code-block::python
+    query_params = st.experimental_get_query_params()
+    st.session_state.query_params = query_params
+    bot_id = st.session_state.query_params.get("bot_id")[0]
+
+Currently, there are 3 parameters required to render the Analytics dashboard:
+
+    #. ``bot_id`` - ``bot_id`` in ``nlp_{env}.nearme_bots`` table
+    #. ``location_id`` - ``ID`` in ``ngchat_{env}.gmb_location`` table
+    #. ``tz`` - We use the `timezone database standard <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>`_, e.g. ``America/Los_Angeles``. The default is the user's browser timezone.

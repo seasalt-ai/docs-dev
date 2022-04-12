@@ -16,7 +16,7 @@ STT protocols
 
 1. Login ``https://suite.seasalt.ai/stt/signin`` to get ``APIKEY``.
 
-2. Client sends STT API request with ``language`` and ``APIKEY`` to API server: ``https://suite.seasalt.ai/api/v1/speech/stt_server_url?language=xxxxx``, put ``APIKEY`` in Headers:
+2. Client sends STT API request with ``language`` and ``APIKEY`` to API server: ``https://suite.seasalt.ai/api/v1/speech/stt_server_url?language=xxxxx``, put ``language`` in query string and ``APIKEY`` in Headers:
 
 .. code-block:: JSON
 

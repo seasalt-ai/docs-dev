@@ -1,0 +1,81 @@
+.. _nearme_bot_architecture:
+
+=====================
+NearMe Bot Architecture & Deployment
+=====================
+
+This page will walk through the fundamental architecture of the NearMe bot backend and how it is deployed.
+
+.. contents:: Table of Contents
+    :local:
+    :depth: 3
+
+Introduction
+============
+
+Prior to working on NearMe, we had spent a lot of time developing chatbots using Rasa, and had even developed a robust system for building & deploying bots (SeaChat Plugin for VSCode).
+However, NearMe presented a lot of unique challenges that forced us to rethink how we created bots.
+Since NearMe targets small business owners, our goal was to abstract a lot of the technical details and make bot creation and deployment completely automated, while also allowing self-serve customization.
+So, instead of manually creating a new bot for each business, we want something like a template to quickly create a customized version for each business automatically.
+
+Architecture
+============
+
+Our first version involved creating a set of template bot files that we could copy into a new directory and then replace key variables with parameters from the business.
+We re-used a lot of the SeaChat architecture for this, including the GitHub integration and deployment workflows.
+
+Bot Template: Normalize the NLU Model
+-------------------------------------
+
+This worked, but we immediately found a pain point: we had to retrain an NLU model each time a change was made to any of the bot files.
+Retraining so many models wasted a lot of time and resources, and to make things worse, because all the bots were generated from a template, the NLU model itself was extremely (if not exactly) the same between bots.
+The next step of improvement was to completely normalize the NLU model so that we could use the same model for *all* the bots.
+Now, when we want to improve our NLU model, we can update the master data in ``NearMe/bot_generation/bots/gbm-master``, retrain it manually, and upload it to AWS fileshare.
+Finally, we can update the deployment of the bot to use the new model, and the NLU for all of our NearMe bots will be improved by using the new model!
+And most importantly, we only have to train it when we have important changes, not for each bot.
+
+GBM Master: Abstract the Data
+-----------------------------
+
+The next pain point we found was with deployment.
+If we were trying to target hundreds or thousands of small businesses, that would take a huge amount of resources to deploy and maintain!
+At that point, each bot required a core pod and an actions pod - each of which has some CPU and RAM overhead.
+However, since the bots are for small businesses, often they would be receiving little to no traffic.
+Our next goal was to abstract away *all* of the business-specific data from the actual Rasa bot code.
+This way, we can deploy a single "master" pod for Rasa Core and one for the Actions server, and those pods can handle the traffic for *all* the businesses.
+
+In order to do this, we moved all the bot responses to the ``actions.py`` file and all the business specific data (name, hours, location, etc.) to external storage (DB, ElasticSearch, and AWS fileshare).
+Each time a message comes in, ``actions.py`` will check which bot it belongs to and then formulate a response based on a template filled with the appropriate business data.
+After this fundamental change to the bot architecture, we only have to deploy one instance of the "GBM Master" to each deployment environment (dev, staging, production).
+And then each time we create a new bot, we simply make the business data available to the "GBM Master", and it can immediately start responding to incoming queries.
+
+.. image:: images/scalable_gbm_bot_routing.png
+   :width: 600
+
+The routing of messages displayed in this diagram will be discussed in more detail in the routing section.
+
+
+Deployment
+==========
+
+In order for a NearMe bot to respond to messages properly, several services must be deployed to the cluster.
+In general, we try to have each of the following services deployed to each namespace (dev, staging, production) so that we can test in completely separate environments.
+However, *all* of these services are now deployed via GitHub Actions, so it makes development and deployment very easy.
+For all of the following services, when you modify relevant files and push those changes upstream, it will re-deploy the service to the ``dev`` environment.
+When you merge changes into the ``staging`` branch, it will re-deploy the service to the ``staging`` environment.
+Finally, when you create a GitHub Release, it will deploy the changes to ``production``.
+
+**GBM Bot Master**: 
+The GBM bot master core pod and actions pod must both be deployed. The files can be found in ``NearMe/bot_generation/bots/gbm-master``. These pods handle incoming user messages and return bot responses.
+
+**FAQ Reranker API**: 
+Most bot responses rely on the FAQ and MR systems to find the best response. These files can be found in ``SeaWord/faq_reranker``.
+
+**Machine Reading API**: 
+The MR endpoints in the FAQ Reranker API rely on the Machine Reading API for span selection. This API is currently *not* deployed via CI/CD, and must be done manually. The file are at ``SeaWord/machine_reading``.
+
+**Bot Routing API**: 
+In order for user messages to be routed from GBM to the bot or a live agent, and visa versa, the bot router must be deployed. The files are in ``SeaX/bot_routing``.
+
+**Bot Generation API**: 
+The self-serve features of the NearMe website rely on the bot generation API. Additionally, the bot router uses endpoints in the bot generation API to fetch important info about the bot in order to route messages properly. These files are in ``NearMe/bot_generation``.

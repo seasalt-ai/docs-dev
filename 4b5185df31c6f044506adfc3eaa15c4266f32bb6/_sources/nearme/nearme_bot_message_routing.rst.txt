@@ -1,0 +1,247 @@
+.. _nearme_bot_message_routing:
+
+==================================
+NearMe Bot Message Routing
+==================================
+
+This page will look at the life cycle of a user message and response.
+We'll look at how messages are routed to/from NearMe, how we transfer to/from a live agent, and how conversation data is stored.
+
+.. contents:: Table of Contents
+    :local:
+    :depth: 3
+
+Introduction
+============
+
+In the first section we discussed the architecture of the bots and how we use a single Rasa server to handle all user messages for all NearMe bots.
+Next, we learned how the GBM agent is set up and how the business data is used to generate bot responses.
+But when a user sends a message, how does that message get from GBM to the bot?
+How does the bot know which business the message is for?
+And how can we transfer users to/from a live agent?
+
+Basic Bot Routing
+=================
+
+Inbound Message Routing
+-----------------------------
+
+Seasalt.ai has a single Google Business Messages account that is used to create all the NearMe agents.
+The GBM account can specify a single webhook where all incoming messages from users are forwarded to.
+This seems simple enough - since we have a single Rasa server handling all our resposes, we should be able to just set the webhook to the Rasa core pod.
+*However,* we must maintain separate environments for dev, staging, and production.
+This means that we actually have *three* Rasa servers, one on each environment.
+So, we need to be able to look at an incoming message from GBM and decide which Rasa server in which environment to forward the message to.
+
+For this reason, we set our GBM webhook to the Bot Router Service, specifically, https://seachat-backstage.seasalt.ai/router/webhook.
+But the next question is, how does the bot router know where to forward the message to?
+During the bot generation process, the final step is to add an association between the agent and bot deployment to the ``agent_deployment_env`` table in the ``gbm_agent_env`` database.
+The table has the following format:
+
+**agent_deployment_env**
+
+.. list-table::
+   :widths: 25, 10, 50, 25
+   :header-rows: 1
+
+   * - Column
+     - Type
+     - Description
+     - Example
+   * - id
+     - int 
+     - A unique ID for the bot 
+     - "123"
+   * - brand_id
+     - str 
+     - The unique brand ID assigned by GBM 
+     - 1b75ea40-65ac-49b2-9589-607095993e46
+   * - agent_id
+     - str 
+     - The unique agent ID assigned by GBM 
+     - a7acb6cd-bde3-4904-8b37-d664e2cf2825
+   * - bot_id
+     - str 
+     - The unique bot ID assigned by the backend API
+     - 91b7d5b9-d071-4da9-ab7d-8302eed441f6
+   * - deployment_env 
+     - str 
+     - The environment that the bot is deployed to: dev, staging, or production
+     - staging
+   * - version
+     - str 
+     - The deployment version: sandbox or public
+     - public
+
+Since the inbound message will always have the Agent ID in it, this way the bot router can lookup the Agent ID and find the corresponding deployment information.
+
+When a message is received by the bot router, the following steps are executed:
+
+1. The brand and agent IDs are grabbed from the incoming message body
+
+2. The ``agent_deployment_env`` table is checked for a matching agent entry
+
+3. If an entry exists, the bot_id, deployment_env, and version are attached to the message body
+
+4. The message body is forwarded to the GBM Bot Master Core pod in the appropriate environment
+
+.. image:: images/scalable_gbm_bot_routing.png
+   :width: 800
+
+
+Outbound Message Routing
+-----------------------------
+
+Once the bot has received a message and generated a response, how does it send the response back to the user?
+
+This answer is quite simple: we built a custom Rasa channel for GBM that handles outbound messages using the GBM Python Client.
+Since the Agent ID is present in the message body, we can just use that with the GBM client to send messages directly back to the user from the Rasa channel.
+
+
+Live Agent Transfer
+===================
+
+After getting the basic routing to and from the bot down, the next feature we wanted to add was live agent support.
+Originally, we implemented this using Twilio integration.
+However, Twilio is too heavy-weight for smaller clients - so we opted to host live agent messaging on our NearMe site.
+
+So, how do we transfer users to a live agent and route the messages appropriately?
+
+Maintaining Conversation State 
+------------------------------
+
+The challenge here is that the router needs to know whether inbound messages should be routed to the bot, or routed to a live agent.
+And it's important that they can only be sent to one or the other, otherwise the user might get two responses to their question!
+
+To tackle this problem, we created a new table called ``nearme_conversation_status`` in the ``gbm_agent_env`` database.
+The table has the following format: 
+
+**nearme_conversation_status**
+
+.. list-table::
+   :widths: 25, 10, 50, 25
+   :header-rows: 1
+
+   * - Column
+     - Type
+     - Description
+     - Example
+   * - conversation_id 
+     - str 
+     - The unique conversation ID assigned by GBM 
+     - fa34a02c-8e67-47af-b241-5499a978b7be
+   * - bot_id
+     - str 
+     - The unique bot ID assigned by the backend API
+     - 91b7d5b9-d071-4da9-ab7d-8302eed441f6
+   * - live_agent 
+     - bool 
+     - The conversation status - whether or not the user is talking to a live agent
+     - True
+
+You can view the statuses of conversations for a particular bot using ``GET seachat.seasalt.ai/router/nearme/{bot_id}/conversations``. See the docs here: https://seachat.seasalt.ai/router/docs.
+
+Now when a message is received by the bot router webhook, the following steps are executed:
+
+1. The brand and agent IDs are grabbed from the incoming message body
+
+2. The ``agent_deployment_env`` table is checked for a matching agent entry
+
+3. If an entry exists, the bot_id, deployment_env, and version are attached to the message body
+
+4. The ``nearme_conversation_status`` table is checked
+
+5. If the ``live_agent`` status is ``True``, the message body is forwarded to the NearMe conversation webhook
+
+6. If the ``live_agent`` status is ``False``, the message body is forwarded to GBM Bot Master Core pod in the appropriate environment
+
+
+Live Agent Outbound Messages
+----------------------------
+
+In order to send messages from the live agent back to the user, an additional endpoint was created in the bot router API.
+The endpoint ``POST /router/nearme/route-to-gbm`` accepts a message body and bot ID, and then uses the GBM Python Client to foward the message to the user.
+
+
+Live Agent Events
+-----------------
+
+There are three additional events native to GBM that are supported by the bot router:
+
+**LIVE_AGENT_REQUESTED**: This event is sent to the bot router webhook when a user clicks the "Request a live agent" button from the GBM conversation interface. In this case, the router will change the conversation status to ``live_agent = True`` and start forwarding messages to the NearMe frontend.
+
+**LIVE_AGENT_JOINED**: When the live agent clicks the "Join Conversation" button from the NearMe Conversations page, it can trigger a live agent joined notification for the user. The bot router hosts an endpoint ``POST router/nearme/agent-joined``, which accepts a bot ID and info about the live agent and then uses the GBM client to forward the ``LIVE_AGENT_JOINED`` event to the user.
+
+**LIVE_AGENT_LEFT**: When the live agent clicks the "Leave Conversation" button from the NearMe Conversations page or when they exit the NearMe site while in conversation with a user, it can trigger a live agent left notification for the user. The bot router hosts an endpoint ``POST router/nearme/agent-left``, which accepts a bot ID and info about the live agent and then uses the GBM client to forward the ``LIVE_AGENT_LEFT`` event to the user.
+
+See the endpoint docs here: https://seachat.seasalt.ai/router/docs
+
+
+Storing Conversation Data 
+=========================
+
+One essential feature of the NearMe site is being able to review user conversations and display analytics based on them. 
+In order to accomplish this, we save all conversation events to the ``nearme_events`` table in the ``nlp-{namespace}`` database.
+
+Rasa has built-in functionality for persisting events to a database; this is called the TrackerStore.
+The TrackerStore will automatically save incoming user messages, internal Rasa events, and outbound bot messages.
+To start, we slightly modified the Rasa TrackerStore to also track the ``conversation_id``, ``sender_name``, and ``bot_id``.
+
+However, when we started supporting live agent transfer, some messages no longer reached the bot (they're sent to the live agent instead).
+So the TrackerStore could not save these events for us. 
+To compensate, we also added functionality to the bot router to save user messages, live agent messages, and live agent events to the database manually.
+We also added the ``event_name`` column to the table to store live agent events.
+The table now has the following format:
+
+**nearme_events**
+
+.. list-table::
+   :widths: 25, 10, 50, 25
+   :header-rows: 1
+
+   * - Column
+     - Type
+     - Description
+     - Example
+   * - bot_id
+     - str 
+     - The unique bot ID assigned by the backend API
+     - 91b7d5b9-d071-4da9-ab7d-8302eed441f6
+   * - conversation_id
+     - str 
+     - The unique ID for the conversation provided by GBM. One user/agent pair always has the same ID.
+     - fa34a02c-8e67-47af-b241-5499a978b7be
+   * - sender_name 
+     - str 
+     - The user's display name 
+     - Kim Dodds 
+   * - type_name 
+     - str
+     - The type of event, defined by Rasa. Includes: user, bot, action, session_started, etc.
+     - user
+   * - timestamp 
+     - float 
+     - The timestamp of the event
+     - 1642635744.4679022
+   * - intent_name
+     - str 
+     - The intent classified by Rasa. Only provided when ``type_name`` == ``user``
+     - greet
+   * - action_name 
+     - str
+     - The action performed by Rasa. Only provided when ``type_name`` == ``action``
+     - action_utter_greet
+   * - text
+     - str 
+     - The isolated text of the user or bot message 
+     - Hi! How can I help you?
+   * - tracker_data 
+     - str 
+     - The raw tracker data dumped from the rasa tracker. Json string.
+     - {"event": "action", "timestamp": 1642635744.4679022, "name": "action_session_start", "policy": null,…}
+   * - event_name 
+     - str 
+     - Events manually added to the DB from interactions outside Rasa - currently only live agent events.
+     - LIVE_AGENT_JOINED
+   
+The bot generation API hosts endpoints to GET and POST conversation events. You can view the docs here: https://seachat.seasalt.ai/bot-actions/docs

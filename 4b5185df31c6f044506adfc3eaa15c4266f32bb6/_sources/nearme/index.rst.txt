@@ -9,4 +9,8 @@ Welcome to NearMe
    :caption: NearMe
 
    readme
+   nearme_bot_architecture
+   nearme_bot_generation
+   nearme_bot_message_routing
+   nearme_bot_analytics
    data_analytics_tutorial

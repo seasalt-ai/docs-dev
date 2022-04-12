@@ -1,0 +1,119 @@
+.. _nearme_bot_generation:
+
+==================================
+NearMe Bot Generation
+==================================
+
+This page will walk through how bots are generated through the NearMe website and which NLP services are called on the backend.
+
+.. contents:: Table of Contents
+    :local:
+    :depth: 3
+
+
+Bot Generation
+==============
+
+When a new bot is created for the first time via the NearMe site, the following steps are executed on the backend:
+
+1. If it's a custom location: Find the business' Google Maps page and run the scraper to get the basic business info, reviews, hours, location, attributes, etc.
+
+2. If it's a GBP authorized location: Use the Google Business Profile API to get all business info, reviews, hours, location, attributes, etc.
+
+3. Store all business info in the backend DB (``ngchat-dev``, ``ngchat-staging``, ``ngchat-production``)
+
+4. Create a brand and agent using the GBM APIs
+
+Once these intial setup steps are completed, the user can go to the ``Local Testing`` tab and click the ``Build`` button.
+This will send a POST request to the NLP Bot Generation API at ``https://seachat.seasalt.ai/bot-actions/nearme_bots``.
+The NLP server will then register the business information to the ``nearme_bots`` table in the NLP database (``nlp-{namespace}``), generate FAQs based on the business attributes, and inject the FAQs, Reviews, and Additional Context into the appropriate ElasticSearch indices. 
+The final important step is that an entry will also be added to the ``agent_deployment_env`` table in the ``gbm_agent_env`` database.
+This table associates a particular GBM agent with a bot in the appropriate deployment environment to ensure proper routing of incoming messages.
+More on that in the Bot Routing section.
+
+.. image:: images/bot_generation.png
+   :width: 800
+
+Once the NLP server is done, the user can immediately scan the QR code on the screen to talk to the bot.
+Additionally, the build process will also trigger the endpoint POST ``https://seachat.seasalt.ai/bot-actions/nearme_bots/{bot_id}/flyer``, which will create a customized marketing flyer for our team to use when approaching the business.
+
+For more detailed information about the endpoints used, refer to the swagger docs: https://seachat.seasalt.ai/bot-actions/docs 
+   
+
+Data Storage
+------------
+
+The NLP team maintains separate DBs from the backend team for all of the bot data that is necessary to keep the bots running.
+At bot generation time, we store important business & bot data to the ``nlp-dev``, ``nlp-staging``, or ``nlp-production`` database in the ``nearme_bots`` table.
+The table has the following format: 
+
+**nearme_bots**
+
+.. list-table::
+   :widths: 25, 10, 50, 25
+   :header-rows: 1
+
+   * - Column
+     - Type
+     - Description
+     - Example
+   * - id
+     - int 
+     - A unique ID for the bot 
+     - "123"
+   * - business_name
+     - str 
+     - The business name 
+     - SeaTech Ltd.
+   * - bot_name
+     - str 
+     - The formatted bot name
+     - seatech-ltd
+   * - bot_id
+     - str 
+     - The unique bot ID assigned by the backend API
+     - 91b7d5b9-d071-4da9-ab7d-8302eed441f6
+   * - version
+     - str 
+     - The deployment version: sandbox or public
+     - public
+   * - faq_index
+     - str 
+     - The ES index for the bot's FAQs
+     - seatech-ltd-91b7d5b9-d071-4da9-ab7d-8302eed441f6-dev-public-faq
+   * - mr_index
+     - str 
+     - The ES index for the bot's reviews & additional context data
+     - seatech-ltd-91b7d5b9-d071-4da9-ab7d-8302eed441f6-dev-public-mr
+   * - hours
+     - str 
+     - A formatted string of the business hours
+     - Monday: 10:00-18:00 Tuesday: 10:00-18:00 Wednesday: 10:00-18:00 Thursday: 10:00-18:00 Friday: 10:00-18:00 Saturday: Closed Sunday: Closed
+   * - phone_number
+     - str
+     - A formatted string of the business phone number
+     - 02 2716 0550
+   * - address
+     - str
+     - A formatted string of the business address
+     - Rm. 4, 3F., No. 170, Sec. 3, Minquan E. Rd., Songshan District, Taipei City, TW
+   * - rating
+     - float
+     - The business rating on Google Maps
+     - 4.5
+   * - menu
+     - str
+     - A link to a menu if it exists
+     - https://seasalt.ai/menu
+   * - website
+     - str
+     - A link to the business website
+     - https://seasalt.ai
+   * - update_time
+     - float
+     - A timestamp of the last time the business info in the nearme_bots table was updated
+     - 1646166762.536154
+   * - logo_url
+     - str
+     - A url to the business avatar logo 
+     - https://seasalt-cdn.s3.us-west-2.amazonaws.com/Bots/kitten-sanctuary/kitten-3.jpg

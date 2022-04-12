@@ -67,7 +67,11 @@ Welcome to SeaChat's Master Documentation!
    :caption: NearMe
 
    NearMe <nearme/readme>
-   NearMe Data Analytics Tutorial <nearme/data_analytics_tutorial>
+   NearMe Bot Architecture <nearme/nearme_bot_architecture>
+   NearMe Bot Generation <nearme/nearme_bot_generation>
+   NearMe Message Routing <nearme/nearme_bot_message_routing>
+   NearMe Conversation Analytics <nearme/nearme_bot_analytics>
+   NearMe Data Studio Analytics Tutorial <nearme/data_analytics_tutorial>
 
  
 .. toctree::
