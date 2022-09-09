@@ -64,6 +64,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../nlp/action_tutorial.html">Action Extraction API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../nlp/xlingualNER_tutorial.html">Cross Lingual NER API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../nlp/mr_tutorial.html">Machine Reading API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/affect_tutorial.html">Affect Detection API Tutoral</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../nlp/redaction_tutorial.html">Redaction Service Tutorial</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">SeaVoice (Seasalt speech)</span></p>
@@ -204,219 +205,219 @@ A product entry has the following format:</p>
 <p>There are three types of products: <code class="docutils literal notranslate"><span class="pre">item</span></code>, <code class="docutils literal notranslate"><span class="pre">combo</span></code>, and <code class="docutils literal notranslate"><span class="pre">virtual</span></code>.</p>
 <p><strong>Item</strong></p>
 <p>A product of type <code class="docutils literal notranslate"><span class="pre">item</span></code> is a single purchasable item. These items can be customized with modifiers only in their modifier groups. Here’s an example of an item from the Starbucks menu:</p>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Caffè Americano&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">776000</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;aliases&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;cafe americano&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;coffee americano&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;Hot Coffees&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;item&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;recommendation_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">538000</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;Hot&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;beverages&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Espresso shots topped with hot water create a light layer of crema culminating in this wonderfully rich cup with depth and nuance. \n Pro Tip: For an additional boost, ask your barista to try this with an extra shot.&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;ingredients&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;Water&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;Brewed Espresso&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;calories&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.95</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://globalassets.starbucks.com/assets/f12bc8af498d45ed92c5d6f1dac64062.jpg&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;modifier_groups&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;size&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sizes&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;query_users_for_modifier&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;modifiers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Short&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">663000</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;price_change&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.7</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;calorie_change&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-10</span><span class="w"></span>
-<span class="w">                </span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tall&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">663001</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;price_change&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.5</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;calorie_change&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-5</span><span class="w"></span>
-<span class="w">                </span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Grande&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">663002</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;price_change&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;calorie_change&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">                </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="p">]</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">]</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Caffè Americano&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">776000</span><span class="p">,</span>
+    <span class="nt">&quot;aliases&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;cafe americano&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;coffee americano&quot;</span>
+    <span class="p">]</span>
+    <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Hot Coffees&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;item&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;recommendation_score&quot;</span><span class="p">:</span> <span class="mi">538000</span><span class="p">,</span>
+    <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Hot&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;beverages&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Espresso shots topped with hot water create a light layer of crema culminating in this wonderfully rich cup with depth and nuance. \n Pro Tip: For an additional boost, ask your barista to try this with an extra shot.&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;ingredients&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Water&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Brewed Espresso&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;calories&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="nt">&quot;price&quot;</span><span class="p">:</span> <span class="mf">2.95</span><span class="p">,</span>
+    <span class="nt">&quot;image&quot;</span><span class="p">:</span> <span class="s2">&quot;https://globalassets.starbucks.com/assets/f12bc8af498d45ed92c5d6f1dac64062.jpg&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;modifier_groups&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;size&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;Sizes&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;query_users_for_modifier&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nt">&quot;minimum&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">&quot;maximum&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">&quot;modifiers&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Short&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">663000</span><span class="p">,</span>
+                    <span class="nt">&quot;default&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+                    <span class="nt">&quot;price_change&quot;</span><span class="p">:</span> <span class="mf">-0.7</span><span class="p">,</span>
+                    <span class="nt">&quot;calorie_change&quot;</span><span class="p">:</span> <span class="mi">-10</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Tall&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">663001</span><span class="p">,</span>
+                    <span class="nt">&quot;default&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+                    <span class="nt">&quot;price_change&quot;</span><span class="p">:</span> <span class="mf">-0.5</span><span class="p">,</span>
+                    <span class="nt">&quot;calorie_change&quot;</span><span class="p">:</span> <span class="mi">-5</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Grande&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">663002</span><span class="p">,</span>
+                    <span class="nt">&quot;default&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="nt">&quot;price_change&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                    <span class="nt">&quot;calorie_change&quot;</span><span class="p">:</span> <span class="mi">0</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p><strong>Combo</strong></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">combo</span></code> product is a set of items that come together; for example, a cheesebuger meal that comes with a drink and fries. In contrast to an <code class="docutils literal notranslate"><span class="pre">item</span></code> type, a combo can have modifiers, as well as other items in it’s modifier groups. In the case of a combo, you may be able to choose between several items (do you want a cheeseburger, hambuger, or veggieburger?), and each item may also be customized by its own modifiers. The crucial difference between an item and combo is that a combo will have items in it’s modifier groups, and then will check if those items have customizable options. A simple item type will never check if it’s modifiers have further customizations. Here’s an example of a combo from the TacoBell menu:</p>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mexican Pizza Combo&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;Combos&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;recommendation_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;combo&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://www.tacobell.com/images/22604_4._mexican_pizza_combo_640x650.jpg&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Served with a large taco, 2 crunchy taco supreme and a Mexican pizza.&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;Combos&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;calories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="mi">1330</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="mi">1330</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">7.19</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;22604&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;modifier_groups&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Item 1: Select your drink&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;modifiers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mountain Dew Baja Blast® Freeze - Regular&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1491&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;price_change&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="w"></span>
-<span class="w">                </span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Strawberry Skittles® Freeze - Regular&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1615&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;price_change&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span><span class="w"></span>
-<span class="w">                </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="p">]</span><span class="w"></span>
-<span class="w">        </span><span class="p">},</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Item 3: Crunchy Taco Supreme®. Would you like to swap this for something else?&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;modifiers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Soft Taco Supreme®&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;22111&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;price_change&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
-<span class="w">                </span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Crunchy Taco Supreme®&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;22101&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;price_change&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
-<span class="w">                </span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nacho Cheese Doritos® Locos Tacos Supreme®&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;22173&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;price_change&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.6</span><span class="w"></span>
-<span class="w">                </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="p">]</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">]</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Mexican Pizza Combo&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Combos&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;recommendation_score&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;combo&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;image&quot;</span><span class="p">:</span> <span class="s2">&quot;https://www.tacobell.com/images/22604_4._mexican_pizza_combo_640x650.jpg&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Served with a large taco, 2 crunchy taco supreme and a Mexican pizza.&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Combos&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;calories&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mi">1330</span><span class="p">,</span>
+        <span class="mi">1330</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;price&quot;</span><span class="p">:</span> <span class="mf">7.19</span><span class="p">,</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;22604&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;modifier_groups&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Item 1: Select your drink&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;minimum&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">&quot;maximum&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">&quot;modifiers&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Mountain Dew Baja Blast® Freeze - Regular&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1491&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;default&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+                    <span class="nt">&quot;price_change&quot;</span><span class="p">:</span> <span class="mf">0.5</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Strawberry Skittles® Freeze - Regular&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1615&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;default&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+                    <span class="nt">&quot;price_change&quot;</span><span class="p">:</span> <span class="mf">0.4</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Item 3: Crunchy Taco Supreme®. Would you like to swap this for something else?&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;minimum&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;maximum&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">&quot;modifiers&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Soft Taco Supreme®&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;22111&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;default&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+                    <span class="nt">&quot;price_change&quot;</span><span class="p">:</span> <span class="mf">0.0</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Crunchy Taco Supreme®&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;22101&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;default&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="nt">&quot;price_change&quot;</span><span class="p">:</span> <span class="mf">0.0</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Nacho Cheese Doritos® Locos Tacos Supreme®&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;22173&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;default&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+                    <span class="nt">&quot;price_change&quot;</span><span class="p">:</span> <span class="mf">0.6</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p><strong>Virtual</strong></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">virtual</span></code> product is similar to a combo, but always contains an item in its modifier_group whose details and own modifier groups the bot should treat as if they were those of the main item. For example, rather than selecting a Breakfast Burrito, then choosing between bacon and sausage as addons, a user would select the virtual Breakfast Burrito, then select either “Breakfast Burrito - Bacon” or “Breakfast Burrito - Sausage” as a modifier. The bot should then treat this selection as it were the actual cart item when displaying information. Here’s an example of a virtual item from the TacoBell menu:</p>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Power Menu Bowl&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;Specialties&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;Power Menu&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;recommendation_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;virtual&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://www.tacobell.com/images/22488_power_menu_bowl_640x650.jpg&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;We start with a bed of seasoned rice and top it with fire grilled chicken, black beans, fresh pico de gallo, premium guacamole, sour cream, lettuce, shredded cheddar cheese and avocado ranch sauce.&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;Specialties&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;Power Menu&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;calories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="mi">470</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.49</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;virtual-22488&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;modifier_groups&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Which style of Power Menu Bowl would you like?&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;modifiers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Power Menu Bowl - Chicken&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;22488&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
-<span class="w">                </span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Power Menu Bowl - Steak&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;22489&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
-<span class="w">                </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="p">]</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">]</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Power Menu Bowl&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Specialties&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Power Menu&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;recommendation_score&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;virtual&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;image&quot;</span><span class="p">:</span> <span class="s2">&quot;https://www.tacobell.com/images/22488_power_menu_bowl_640x650.jpg&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;We start with a bed of seasoned rice and top it with fire grilled chicken, black beans, fresh pico de gallo, premium guacamole, sour cream, lettuce, shredded cheddar cheese and avocado ranch sauce.&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Specialties&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Power Menu&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;calories&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mi">470</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;price&quot;</span><span class="p">:</span> <span class="mf">5.49</span><span class="p">,</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;virtual-22488&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;modifier_groups&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Which style of Power Menu Bowl would you like?&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;minimum&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">&quot;maximum&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">&quot;modifiers&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Power Menu Bowl - Chicken&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;22488&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;default&quot;</span><span class="p">:</span> <span class="kc">true</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Power Menu Bowl - Steak&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;22489&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;default&quot;</span><span class="p">:</span> <span class="kc">false</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>And here’s the entry for the <code class="docutils literal notranslate"><span class="pre">Power</span> <span class="pre">Menu</span> <span class="pre">Bowl</span> <span class="pre">-</span> <span class="pre">Chicken</span></code>:</p>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Power Menu Bowl - Chicken&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;recommendation_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;item&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://www.tacobell.com/images/22488_power_menu_bowl_640x650.jpg&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;We start with a bed of seasoned rice and top it with fire grilled chicken, black beans, fresh pico de gallo, premium guacamole, sour cream, lettuce, shredded cheddar cheese and avocado ranch sauce.&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;calories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="mi">45</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.49</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;22488&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;modifier_groups&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Would you like to change the protein?&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;modifiers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;No Chicken&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2271&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;price_change&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
-<span class="w">                </span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Extra Chicken&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2273&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;price_change&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.3</span><span class="w"></span>
-<span class="w">                </span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Shredded Chicken&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;22782&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;price_change&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
-<span class="w">                </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="p">]</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">]</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Power Menu Bowl - Chicken&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;recommendation_score&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;item&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;image&quot;</span><span class="p">:</span> <span class="s2">&quot;https://www.tacobell.com/images/22488_power_menu_bowl_640x650.jpg&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;We start with a bed of seasoned rice and top it with fire grilled chicken, black beans, fresh pico de gallo, premium guacamole, sour cream, lettuce, shredded cheddar cheese and avocado ranch sauce.&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;calories&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mi">45</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;price&quot;</span><span class="p">:</span> <span class="mf">5.49</span><span class="p">,</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;22488&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;modifier_groups&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Would you like to change the protein?&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;minimum&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;maximum&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">&quot;modifiers&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;No Chicken&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;2271&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;default&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+                    <span class="nt">&quot;price_change&quot;</span><span class="p">:</span> <span class="mf">0.0</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Extra Chicken&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;2273&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;default&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+                    <span class="nt">&quot;price_change&quot;</span><span class="p">:</span> <span class="mf">1.3</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Shredded Chicken&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;22782&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;default&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+                    <span class="nt">&quot;price_change&quot;</span><span class="p">:</span> <span class="mf">0.0</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Note that the two items in its modifier groups in turn have their own distinct modifier groups. The virtual item lets us take advantage of a system already in place for combos (i.e. listing items in modifier groups) in order to set up this kind of conditionality of modifier groups without adding additional complexity. That is, it gives us an easy way to say “if you get it with chicken, here are the modifier groups for that, but if you get it with steak, here are the modifier groups for that.”</p>
