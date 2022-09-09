@@ -14,4 +14,5 @@ Welcome to SeaWord
    action_tutorial
    xlingualNER_tutorial
    mr_tutorial
+   affect_tutorial
    redaction_tutorial

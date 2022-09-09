@@ -19,7 +19,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Redaction Tutorial" href="redaction_tutorial.html" />
+    <link rel="next" title="Affect Detection API Tutorial" href="affect_tutorial.html" />
     <link rel="prev" title="xlingualNER API Tutorial" href="xlingualNER_tutorial.html" /> 
 </head>
 
@@ -64,6 +64,7 @@
 <li class="toctree-l1"><a class="reference internal" href="action_tutorial.html">Action Extraction API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="xlingualNER_tutorial.html">Cross Lingual NER API Tutorial</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Machine Reading API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="affect_tutorial.html">Affect Detection API Tutoral</a></li>
 <li class="toctree-l1"><a class="reference internal" href="redaction_tutorial.html">Redaction Service Tutorial</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">SeaVoice (Seasalt speech)</span></p>
@@ -143,14 +144,14 @@
 </pre></div>
 </div>
 <p>The required request body contains a <code class="docutils literal notranslate"><span class="pre">question</span></code> and a list of <code class="docutils literal notranslate"><span class="pre">context</span></code> segments.</p>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Where is Seasalt.ai located?&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;context&quot;</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="p">[</span><span class="w"></span>
-<span class="w">            </span><span class="s2">&quot;Seasalt.ai is an AI communication solutions start-up located in Seattle, WA.&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="s2">&quot;Their products include SeaChat, SeaVoice, SeaMeet, and SeaX.&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="p">]</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;Where is Seasalt.ai located?&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;context&quot;</span><span class="p">:</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;Seasalt.ai is an AI communication solutions start-up located in Seattle, WA.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Their products include SeaChat, SeaVoice, SeaMeet, and SeaX.&quot;</span>
+        <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <div class="admonition important">
@@ -162,11 +163,11 @@
 <p>A context segment cannot exceed 512 characters.</p>
 </div>
 <p>A sucessful response will return an answer, which includes a <code class="docutils literal notranslate"><span class="pre">score</span></code>, the full <code class="docutils literal notranslate"><span class="pre">review</span></code> or context segement that the answer span came from, and the extracted <code class="docutils literal notranslate"><span class="pre">answer</span></code>:</p>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Seattle, WA&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;review&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Seasalt.ai is an AI communication solutions start-up located in Seattle, WA.&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9610805511474609</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;answer&quot;</span><span class="p">:</span> <span class="s2">&quot;Seattle, WA&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;review&quot;</span><span class="p">:</span> <span class="s2">&quot;Seasalt.ai is an AI communication solutions start-up located in Seattle, WA.&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;score&quot;</span><span class="p">:</span> <span class="mf">0.9610805511474609</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>
@@ -178,7 +179,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="xlingualNER_tutorial.html" class="btn btn-neutral float-left" title="xlingualNER API Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="redaction_tutorial.html" class="btn btn-neutral float-right" title="Redaction Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="affect_tutorial.html" class="btn btn-neutral float-right" title="Affect Detection API Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

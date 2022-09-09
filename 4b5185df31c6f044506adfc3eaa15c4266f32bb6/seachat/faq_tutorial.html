@@ -71,6 +71,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../nlp/action_tutorial.html">Action Extraction API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../nlp/xlingualNER_tutorial.html">Cross Lingual NER API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../nlp/mr_tutorial.html">Machine Reading API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/affect_tutorial.html">Affect Detection API Tutoral</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../nlp/redaction_tutorial.html">Redaction Service Tutorial</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">SeaVoice (Seasalt speech)</span></p>
@@ -204,18 +205,18 @@ Open your <code class="docutils literal notranslate"><span class="pre">config.ym
 To add the SeaChat FAQ importer, add the name as the path to the <code class="docutils literal notranslate"><span class="pre">FAQImporter</span></code> class.
 Specify the paths to the csv files under <code class="docutils literal notranslate"><span class="pre">faq_paths</span></code>.
 You can also optionally specify the <code class="docutils literal notranslate"><span class="pre">augment_with_synonyms</span></code> and <code class="docutils literal notranslate"><span class="pre">timezone</span></code> fields.</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">importers</span><span class="p">:</span><span class="w"></span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seachat_plugins.importers.faq_importer.FAQImporter</span><span class="w"></span>
-<span class="w">  </span><span class="nt">faq_paths</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/faq.csv</span><span class="w"></span>
-<span class="w">  </span><span class="nt">augment_with_synonyms</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
-<span class="w">  </span><span class="nt">timezone</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">America/Los_Angeles</span><span class="w"></span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RasaFileImporter</span><span class="w"></span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">importers</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">seachat_plugins.importers.faq_importer.FAQImporter</span>
+  <span class="nt">faq_paths</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">data/faq.csv</span>
+  <span class="nt">augment_with_synonyms</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+  <span class="nt">timezone</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">America/Los_Angeles</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">RasaFileImporter</span>
 </pre></div>
 </div>
 <p>Next, we can specify the regular Rasa importer so that our Rasa formatted files are still imported properly.</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">importers</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RasaFileImporter</span><span class="w"></span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">importers</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">RasaFileImporter</span>
 </pre></div>
 </div>
 <p>For a more detailed explanation of how the importer can be configured, see <a class="reference internal" href="faq.html#faq-importer"><span class="std std-ref">FAQImporter</span></a> in the FAQ overview.</p>
@@ -227,12 +228,12 @@ We can simply replace Rasa’s <code class="docutils literal notranslate"><span 
 For this tutorial bot we will set up ElasticSearch to use a local service and will skip using BERT word embeddings.
 See <a class="reference internal" href="faq.html#elastic-selector"><span class="std std-ref">ElasticSelector</span></a> in the FAQ overview for detailed information about how the component can be configured.
 For now, the following can be copied and pasted into the <code class="docutils literal notranslate"><span class="pre">config.yml</span></code> file in place of Rasa’s ResponseSelector.</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seachat_plugins.nlu.selectors.elastic_selector.ElasticSelector</span><span class="w"></span>
-<span class="w">  </span><span class="nt">es_indexing</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">index_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tutorial_faq</span><span class="w"></span>
-<span class="w">    </span><span class="c1"># On the k8s cluster, login/secret will be set automatically.</span><span class="w"></span>
-<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"> </span><span class="c1"># or elastic.seasalt.ai for the cluster</span><span class="w"></span>
-<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9200</span><span class="w"></span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">seachat_plugins.nlu.selectors.elastic_selector.ElasticSelector</span>
+  <span class="nt">es_indexing</span><span class="p">:</span>
+    <span class="nt">index_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial_faq</span>
+    <span class="c1"># On the k8s cluster, login/secret will be set automatically.</span>
+    <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">localhost</span> <span class="c1"># or elastic.seasalt.ai for the cluster</span>
+    <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9200</span>
 </pre></div>
 </div>
 <p>These are the minimal configurations required to run the ElasticSelector. For additional configurations, such a re-ranking and BERT embedding integration, see the <a class="reference internal" href="faq.html#seachat-faq"><span class="std std-ref">FAQ Overview</span></a>.</p>
@@ -246,25 +247,25 @@ For now, the following can be copied and pasted into the <code class="docutils l
 <p>Once the FAQ components are integrated in the config, there are a few more steps to make sure that bot accurately responds to the query.
 First, the faq intent and action names must be added to the bot domain.
 To the <code class="docutils literal notranslate"><span class="pre">intents</span></code> list in the <code class="docutils literal notranslate"><span class="pre">domain.yml</span></code> file, add <code class="docutils literal notranslate"><span class="pre">faq</span></code>.</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">intents</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">faq</span><span class="w"></span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">intents</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">faq</span>
 </pre></div>
 </div>
 <p>This intent name should match the <code class="docutils literal notranslate"><span class="pre">retrieval_intent</span></code> field on the ElasticSelector configuration.
 Also, add <code class="docutils literal notranslate"><span class="pre">utter_faq</span></code> to the <code class="docutils literal notranslate"><span class="pre">actions</span></code> list.
 This is the default action name for the ElasticSelectors action.</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">actions</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">utter_faq</span><span class="w"></span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">actions</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_faq</span>
 </pre></div>
 </div>
 <p>Finally, we will need to add a new state to the <code class="docutils literal notranslate"><span class="pre">dialogue.yml</span></code> file that recognizes the FAQ intent, and returns the <code class="docutils literal notranslate"><span class="pre">respond_faq</span></code> action.</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">$[faq]</span><span class="p p-Indicator">:</span><span class="w"></span>
-<span class="nt">rank_score</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w"></span>
-<span class="nt">conditions</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INTENT.name == &#39;faq&#39;</span><span class="w"></span>
-<span class="nt">actions</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">utter_faq</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action_listen</span><span class="w"></span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">$[faq]</span><span class="p p-Indicator">:</span>
+<span class="nt">rank_score</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">100</span>
+<span class="nt">conditions</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">INTENT.name == &#39;faq&#39;</span>
+<span class="nt">actions</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_faq</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">action_listen</span>
 </pre></div>
 </div>
 </section>

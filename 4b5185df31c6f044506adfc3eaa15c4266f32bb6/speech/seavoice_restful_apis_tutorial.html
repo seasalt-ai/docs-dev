@@ -64,6 +64,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../nlp/action_tutorial.html">Action Extraction API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../nlp/xlingualNER_tutorial.html">Cross Lingual NER API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../nlp/mr_tutorial.html">Machine Reading API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/affect_tutorial.html">Affect Detection API Tutoral</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../nlp/redaction_tutorial.html">Redaction Service Tutorial</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">SeaVoice (Seasalt speech)</span></p>
@@ -127,17 +128,17 @@
 <li><p>Login <code class="docutils literal notranslate"><span class="pre">https://suite.seasalt.ai/stt/signin</span></code> to get <code class="docutils literal notranslate"><span class="pre">APIKEY</span></code>.</p></li>
 <li><p>Client sends STT API request with <code class="docutils literal notranslate"><span class="pre">language</span></code> and <code class="docutils literal notranslate"><span class="pre">APIKEY</span></code> to API server: <code class="docutils literal notranslate"><span class="pre">https://suite.seasalt.ai/api/v1/speech/stt_server_url?language=xxxxx</span></code>, put <code class="docutils literal notranslate"><span class="pre">language</span></code> in query string and <code class="docutils literal notranslate"><span class="pre">APIKEY</span></code> in Headers:</p></li>
 </ol>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;speech_token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;APIKEY&gt;&quot;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;speech_token&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;APIKEY&gt;&quot;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
 <li><p>API server returns HTTP 200 with json string including the available STT server’s url to the client, like,</p></li>
 </ol>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;server_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wss://&lt;host&gt;:&lt;port&gt;/client/ws/speech&quot;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;server_url&quot;</span><span class="p">:</span> <span class="s2">&quot;wss://&lt;host&gt;:&lt;port&gt;/client/ws/speech&quot;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>If something is wrong, API server may return HTTP 404 with a json string including an error message.</p>
@@ -145,33 +146,33 @@
 <li><p>Client connects to the available STT server by websocket with <code class="docutils literal notranslate"><span class="pre">APIKEY</span></code>, <code class="docutils literal notranslate"><span class="pre">language</span></code> and <code class="docutils literal notranslate"><span class="pre">punctuation</span></code> settings, e.g. <code class="docutils literal notranslate"><span class="pre">wss://speech.seasalt.ai:5019/client/ws/speech?token=&lt;APIKEY&gt;&amp;language=zh-tw&amp;punctuation=True</span></code></p></li>
 <li><p>STT server verifies <code class="docutils literal notranslate"><span class="pre">APIKEY</span></code> on API server, if something wrong, STT server will reply error message and close websocket connection:</p></li>
 </ol>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Token invalid&quot;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;Token invalid&quot;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="6">
 <li><p>After connecting, Client starts to record the microphone and stream audio data to STT server (See below for data format).</p></li>
 <li><p>STT server receives audio data and does recognition, then send recognizing/recognized results to Client, the format is,</p></li>
 </ol>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;final&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;hypotheses&quot;</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="p">[</span><span class="w"></span>
-<span class="w">            </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;transcript&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;你 好&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;likelihood&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">377.78</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;segment-start&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;segment-length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.8</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;total-length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.75</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&quot;result&quot;</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;final&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;hypotheses&quot;</span><span class="p">:</span>
+        <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;transcript&quot;</span><span class="p">:</span> <span class="s2">&quot;你 好&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;likelihood&quot;</span><span class="p">:</span> <span class="mf">377.78</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;segment-start&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="nt">&quot;segment-length&quot;</span><span class="p">:</span> <span class="mf">2.8</span><span class="p">,</span>
+    <span class="nt">&quot;total-length&quot;</span><span class="p">:</span> <span class="mf">3.75</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -200,30 +201,30 @@
 <ol class="arabic simple">
 <li><p>Client first calls API <code class="docutils literal notranslate"><span class="pre">https://suite.seasalt.ai/api/v1/user/login</span></code> to login and get <code class="docutils literal notranslate"><span class="pre">login_token</span></code>.</p></li>
 </ol>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;account_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;username&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;password&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;account_id&quot;</span><span class="p">:</span> <span class="s2">&quot;username&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;password&quot;</span><span class="p">,</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
 <li><p>Client sends https POST request to API server with <code class="docutils literal notranslate"><span class="pre">language</span></code>, <code class="docutils literal notranslate"><span class="pre">voice</span></code> and <code class="docutils literal notranslate"><span class="pre">login_token</span></code>, for example, <code class="docutils literal notranslate"><span class="pre">https://suite.seasalt.ai/api/v1/speech/text_to_speech?token=xxxxxxxxxxxxxxxxxxx</span></code>.</p></li>
 </ol>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zh-TW&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;voice&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lin_Xiaomei&quot;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;language&quot;</span><span class="p">:</span> <span class="s2">&quot;zh-TW&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;voice&quot;</span><span class="p">:</span> <span class="s2">&quot;Lin_Xiaomei&quot;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>please put <code class="docutils literal notranslate"><span class="pre">token</span></code> in the Headers and put <code class="docutils literal notranslate"><span class="pre">language</span></code> and <code class="docutils literal notranslate"><span class="pre">voice</span></code> in the request body.</p>
 <ol class="arabic simple" start="3">
 <li><p>API server returns HTTP 200 with json string including the available TTS server’s url and <code class="docutils literal notranslate"><span class="pre">speech_service_token</span></code> to Client, like</p></li>
 </ol>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;account_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test123&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;server_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="nt">&quot;wss://&lt;host&gt;:&lt;port&gt;&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xxxxxxxxxxxxxxxxxx(speech_service_token)&quot;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;account_id&quot;</span><span class="p">:</span> <span class="s2">&quot;test123&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;server_url&quot;</span><span class="p">:</span> <span class="nt">&quot;wss://&lt;host&gt;:&lt;port&gt;&quot;</span>
+    <span class="nt">&quot;token&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxxxxxxxxxxxx(speech_service_token)&quot;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>If something is wrong, API server may return HTTP 404 with a json string including an error message.</p>
@@ -231,26 +232,25 @@
 <li><p>After got TTS server’s url and <code class="docutils literal notranslate"><span class="pre">speech_service_token</span></code>, Client connects to TTS server as a websocket client.</p></li>
 <li><p>If successfully connected, Client sends json string to TTS server, for example,</p></li>
 </ol>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;business&quot;</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zh-TW&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;voice&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lin_Xiaomei&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xxxxxxxxxxxxxxxxxx(speech_token)&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;pitch&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;speed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;sample_rate&quot;</span><span class="p">:</span><span class="mi">16000</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;rules&quot;</span><span class="p">:</span><span class="s2">&quot;TSMC | 台積電\n你好 | ㄋㄧˇ ㄏㄠˇ\n為了 | wei4 le5&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;用户输入TEXT或SSML string (需要UTF-8格式并进行base64编码)&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;ssml&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;False&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;business&quot;</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;language&quot;</span><span class="p">:</span> <span class="s2">&quot;zh-TW&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;voice&quot;</span><span class="p">:</span> <span class="s2">&quot;Lin_Xiaomei&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;token&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxxxxxxxxxxxx(speech_token)&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;settings&quot;</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;pitch&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="nt">&quot;speed&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="nt">&quot;sample_rate&quot;</span><span class="p">:</span><span class="mi">16000</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;用户输入TEXT或SSML string (需要UTF-8格式并进行base64编码)&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;ssml&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -261,23 +261,22 @@
 <li><p>Note 3, [“data”][“ssml”] should be True if [“data”][“text”] is a SSML string, i.e. using SSML tab.</p></li>
 <li><p>Note 4, “pitch” could be a value between -12.0 to 12.0, 0.0 is normal pitch,  needs to convert pitch from a percentage number like <cite>100%</cite> to a decimal like <cite>12.0</cite>. It’s a linear conversion, <cite>0%</cite> corresponds to <cite>0.0</cite>, <cite>100%</cite> corresponds to <cite>12.0</cite>, <cite>-100%</cite> corresponds to <cite>-12.0</cite>.</p></li>
 <li><p>Note 5, “speed” could be a value from 0.5 to 2.0, 1.0 is normal speed.</p></li>
-<li><p>Note 6, “rules” are pronunciation rules of the form <cite>&quot;original_word | replacement&quot;</cite>. A set of rules are written as &quot;word1|alias1\nword2|alias2\nword3|alias3...&quot;</p></li>
 </ul>
 </div>
 <ol class="arabic simple" start="6">
 <li><p>After sending the TEXT/SSML string, Client calls ws.recv() to wait for TTS server to send the streaming audio data.</p></li>
 <li><p>TTS server performs synthesis and keeps sending streaming audio data to Client. The format is,</p></li>
 </ol>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;seq_id&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;progress&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;audio&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;base64 encoded raw pcm data&gt;&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;sid&quot;</span><span class="p">:</span> <span class="s2">&quot;seq_id&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;progress&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;audio&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;base64 encoded raw pcm data&gt;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <div class="admonition note">
