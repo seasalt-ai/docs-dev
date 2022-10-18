@@ -1,36 +1,76 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
   <title>NearMe Bot Generation &mdash; Seasalt.ai Developers 0.0.1 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-    <script src="../_static/js/theme.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="NearMe Bot Message Routing" href="nearme_bot_message_routing.html" />
     <link rel="prev" title="NearMe Bot Architecture &amp; Deployment" href="nearme_bot_architecture.html" /> 
 </head>
 
-<body class="wy-body-for-nav"> 
+<body class="wy-body-for-nav">
+
+   
   <div class="wy-grid-for-nav">
+    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: #2980B9" >
+          
+
+          
             <a href="../index.html" class="icon icon-home"> Seasalt.ai Developers
+          
+
+          
+            
             <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
           </a>
+
+          
+            
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -38,42 +78,47 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Product Introductions</span></p>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Product Introductions</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../product_introduction/seax.html">SeaX</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../product_introduction/seavoice.html">SeaVoice</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">SeaChat</span></p>
+<p class="caption"><span class="caption-text">SeaChat</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../seachat/quickstart.html">SeaChat Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../seachat/bot_tutorial.html">SeaChat Bot Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../seachat/policy.html">SeaChat Policy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../seachat/faq.html">SeaChat FAQ</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">SeaChat-cart</span></p>
+<p class="caption"><span class="caption-text">SeaChat-cart</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../cart/readme.html">SeaChat Cart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cart/seachat_cart.html">Technical Docs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">SeaWord</span></p>
+<p class="caption"><span class="caption-text">SeaWord</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../nlp/readme.html">SeaWord</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nlp/sum_tutorial.html">Summarization API Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nlp/topic_tutorial.html">Topic Extraction API Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nlp/action_tutorial.html">Action Extraction API Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nlp/xlingualNER_tutorial.html">Cross Lingual NER API Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nlp/mr_tutorial.html">Machine Reading API Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nlp/affect_tutorial.html">Affect Detection API Tutoral</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nlp/redaction_tutorial.html">Redaction Service Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/v1/index.html">SeaWord v1 APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/v2/index.html">SeaWord v2 APIs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">SeaVoice (Seasalt speech)</span></p>
+<p class="caption"><span class="caption-text">SeaVoice (Seasalt speech)</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../speech/readme.html">SeaVoice README</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../speech/seavoice_sdk_python_tutorial.html">SeaVoice SDK (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../speech/seavoice_restful_apis_tutorial.html">SeaVoice RESTful APIs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">NearMe</span></p>
+<p class="caption"><span class="caption-text">NearMe</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="readme.html">NearMe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearme_bot_architecture.html">NearMe Bot Architecture</a></li>
@@ -82,37 +127,78 @@
 <li class="toctree-l1"><a class="reference internal" href="nearme_bot_analytics.html">NearMe Conversation Analytics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_analytics_tutorial.html">NearMe Data Studio Analytics Tutorial</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">SeaChat-report</span></p>
+<p class="caption"><span class="caption-text">SeaChat-report</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../report/index.html">Welcome to SeaChat-report’s documentation!</a></li>
 </ul>
 
+            
+          
         </div>
+        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Seasalt.ai Developers</a>
+        
       </nav>
 
+
       <div class="wy-nav-content">
+        
         <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
+    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
       <li>NearMe Bot Generation</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
+        
+          
             <a href="../_sources/nearme/nearme_bot_generation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-             
-  <section id="nearme-bot-generation">
-<span id="id1"></span><h1>NearMe Bot Generation<a class="headerlink" href="#nearme-bot-generation" title="Permalink to this headline"></a></h1>
+            
+  <div class="section" id="nearme-bot-generation">
+<span id="id1"></span><h1>NearMe Bot Generation<a class="headerlink" href="#nearme-bot-generation" title="Permalink to this headline">¶</a></h1>
 <p>This page will walk through how bots are generated through the NearMe website and which NLP services are called on the backend.</p>
 <div class="contents local topic" id="table-of-contents">
 <p class="topic-title">Table of Contents</p>
@@ -124,8 +210,8 @@
 </li>
 </ul>
 </div>
-<section id="bot-generation">
-<h2><a class="toc-backref" href="#id2">Bot Generation</a><a class="headerlink" href="#bot-generation" title="Permalink to this headline"></a></h2>
+<div class="section" id="bot-generation">
+<h2><a class="toc-backref" href="#id2">Bot Generation</a><a class="headerlink" href="#bot-generation" title="Permalink to this headline">¶</a></h2>
 <p>When a new bot is created for the first time via the NearMe site, the following steps are executed on the backend:</p>
 <ol class="arabic simple">
 <li><p>If it’s a custom location: Find the business’ Google Maps page and run the scraper to get the basic business info, reviews, hours, location, attributes, etc.</p></li>
@@ -143,8 +229,8 @@ More on that in the Bot Routing section.</p>
 <p>Once the NLP server is done, the user can immediately scan the QR code on the screen to talk to the bot.
 Additionally, the build process will also trigger the endpoint POST <code class="docutils literal notranslate"><span class="pre">https://seachat.seasalt.ai/bot-actions/nearme_bots/{bot_id}/flyer</span></code>, which will create a customized marketing flyer for our team to use when approaching the business.</p>
 <p>For more detailed information about the endpoints used, refer to the swagger docs: <a class="reference external" href="https://seachat.seasalt.ai/bot-actions/docs">https://seachat.seasalt.ai/bot-actions/docs</a></p>
-<section id="data-storage">
-<h3><a class="toc-backref" href="#id3">Data Storage</a><a class="headerlink" href="#data-storage" title="Permalink to this headline"></a></h3>
+<div class="section" id="data-storage">
+<h3><a class="toc-backref" href="#id3">Data Storage</a><a class="headerlink" href="#data-storage" title="Permalink to this headline">¶</a></h3>
 <p>The NLP team maintains separate DBs from the backend team for all of the bot data that is necessary to keep the bots running.
 At bot generation time, we store important business &amp; bot data to the <code class="docutils literal notranslate"><span class="pre">nlp-dev</span></code>, <code class="docutils literal notranslate"><span class="pre">nlp-staging</span></code>, or <code class="docutils literal notranslate"><span class="pre">nlp-production</span></code> database in the <code class="docutils literal notranslate"><span class="pre">nearme_bots</span></code> table.
 The table has the following format:</p>
@@ -241,50 +327,69 @@ The table has the following format:</p>
 </tr>
 </tbody>
 </table>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
            </div>
+           
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="nearme_bot_architecture.html" class="btn btn-neutral float-left" title="NearMe Bot Architecture &amp; Deployment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="nearme_bot_message_routing.html" class="btn btn-neutral float-right" title="NearMe Bot Message Routing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="nearme_bot_architecture.html" class="btn btn-neutral float-left" title="NearMe Bot Architecture &amp; Deployment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020-2021, Seasalt.ai.</p>
-  </div>
+    <p>
+        &#169; Copyright 2020-2021, Seasalt.ai.
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
         </div>
       </div>
+
     </section>
+
   </div>
-  <script>
+  
+
+  <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-    <!-- Theme Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-10405841-8"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', 'UA-10405841-8', {
-          'anonymize_ip': false,
-      });
-    </script> 
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-10405841-8', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+   
 
 </body>
 </html>

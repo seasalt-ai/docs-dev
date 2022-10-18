@@ -1,36 +1,76 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
   <title>NearMe Bot Message Routing &mdash; Seasalt.ai Developers 0.0.1 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-    <script src="../_static/js/theme.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="NearMe Bot Query Analytics" href="nearme_bot_analytics.html" />
     <link rel="prev" title="NearMe Bot Generation" href="nearme_bot_generation.html" /> 
 </head>
 
-<body class="wy-body-for-nav"> 
+<body class="wy-body-for-nav">
+
+   
   <div class="wy-grid-for-nav">
+    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: #2980B9" >
+          
+
+          
             <a href="../index.html" class="icon icon-home"> Seasalt.ai Developers
+          
+
+          
+            
             <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
           </a>
+
+          
+            
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -38,42 +78,47 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Product Introductions</span></p>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Product Introductions</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../product_introduction/seax.html">SeaX</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../product_introduction/seavoice.html">SeaVoice</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">SeaChat</span></p>
+<p class="caption"><span class="caption-text">SeaChat</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../seachat/quickstart.html">SeaChat Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../seachat/bot_tutorial.html">SeaChat Bot Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../seachat/policy.html">SeaChat Policy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../seachat/faq.html">SeaChat FAQ</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">SeaChat-cart</span></p>
+<p class="caption"><span class="caption-text">SeaChat-cart</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../cart/readme.html">SeaChat Cart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cart/seachat_cart.html">Technical Docs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">SeaWord</span></p>
+<p class="caption"><span class="caption-text">SeaWord</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../nlp/readme.html">SeaWord</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nlp/sum_tutorial.html">Summarization API Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nlp/topic_tutorial.html">Topic Extraction API Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nlp/action_tutorial.html">Action Extraction API Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nlp/xlingualNER_tutorial.html">Cross Lingual NER API Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nlp/mr_tutorial.html">Machine Reading API Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nlp/affect_tutorial.html">Affect Detection API Tutoral</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nlp/redaction_tutorial.html">Redaction Service Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/v1/index.html">SeaWord v1 APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/v2/index.html">SeaWord v2 APIs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">SeaVoice (Seasalt speech)</span></p>
+<p class="caption"><span class="caption-text">SeaVoice (Seasalt speech)</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../speech/readme.html">SeaVoice README</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../speech/seavoice_sdk_python_tutorial.html">SeaVoice SDK (Python)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../speech/seavoice_restful_apis_tutorial.html">SeaVoice RESTful APIs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">NearMe</span></p>
+<p class="caption"><span class="caption-text">NearMe</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="readme.html">NearMe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearme_bot_architecture.html">NearMe Bot Architecture</a></li>
@@ -82,37 +127,78 @@
 <li class="toctree-l1"><a class="reference internal" href="nearme_bot_analytics.html">NearMe Conversation Analytics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_analytics_tutorial.html">NearMe Data Studio Analytics Tutorial</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">SeaChat-report</span></p>
+<p class="caption"><span class="caption-text">SeaChat-report</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../report/index.html">Welcome to SeaChat-report’s documentation!</a></li>
 </ul>
 
+            
+          
         </div>
+        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Seasalt.ai Developers</a>
+        
       </nav>
 
+
       <div class="wy-nav-content">
+        
         <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
+    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
       <li>NearMe Bot Message Routing</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
+        
+          
             <a href="../_sources/nearme/nearme_bot_message_routing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-             
-  <section id="nearme-bot-message-routing">
-<span id="id1"></span><h1>NearMe Bot Message Routing<a class="headerlink" href="#nearme-bot-message-routing" title="Permalink to this headline"></a></h1>
+            
+  <div class="section" id="nearme-bot-message-routing">
+<span id="id1"></span><h1>NearMe Bot Message Routing<a class="headerlink" href="#nearme-bot-message-routing" title="Permalink to this headline">¶</a></h1>
 <p>This page will look at the life cycle of a user message and response.
 We’ll look at how messages are routed to/from NearMe, how we transfer to/from a live agent, and how conversation data is stored.</p>
 <div class="contents local topic" id="table-of-contents">
@@ -135,18 +221,18 @@ We’ll look at how messages are routed to/from NearMe, how we transfer to/from 
 <li><p><a class="reference internal" href="#storing-conversation-data" id="id10">Storing Conversation Data</a></p></li>
 </ul>
 </div>
-<section id="introduction">
-<h2><a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h2>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>In the first section we discussed the architecture of the bots and how we use a single Rasa server to handle all user messages for all NearMe bots.
 Next, we learned how the GBM agent is set up and how the business data is used to generate bot responses.
 But when a user sends a message, how does that message get from GBM to the bot?
 How does the bot know which business the message is for?
 And how can we transfer users to/from a live agent?</p>
-</section>
-<section id="basic-bot-routing">
-<h2><a class="toc-backref" href="#id3">Basic Bot Routing</a><a class="headerlink" href="#basic-bot-routing" title="Permalink to this headline"></a></h2>
-<section id="inbound-message-routing">
-<h3><a class="toc-backref" href="#id4">Inbound Message Routing</a><a class="headerlink" href="#inbound-message-routing" title="Permalink to this headline"></a></h3>
+</div>
+<div class="section" id="basic-bot-routing">
+<h2><a class="toc-backref" href="#id3">Basic Bot Routing</a><a class="headerlink" href="#basic-bot-routing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="inbound-message-routing">
+<h3><a class="toc-backref" href="#id4">Inbound Message Routing</a><a class="headerlink" href="#inbound-message-routing" title="Permalink to this headline">¶</a></h3>
 <p>Seasalt.ai has a single Google Business Messages account that is used to create all the NearMe agents.
 The GBM account can specify a single webhook where all incoming messages from users are forwarded to.
 This seems simple enough - since we have a single Rasa server handling all our resposes, we should be able to just set the webhook to the Rasa core pod.
@@ -214,22 +300,22 @@ The table has the following format:</p>
 <li><p>The message body is forwarded to the GBM Bot Master Core pod in the appropriate environment</p></li>
 </ol>
 <a class="reference internal image-reference" href="../_images/scalable_gbm_bot_routing.png"><img alt="../_images/scalable_gbm_bot_routing.png" src="../_images/scalable_gbm_bot_routing.png" style="width: 800px;" /></a>
-</section>
-<section id="outbound-message-routing">
-<h3><a class="toc-backref" href="#id5">Outbound Message Routing</a><a class="headerlink" href="#outbound-message-routing" title="Permalink to this headline"></a></h3>
+</div>
+<div class="section" id="outbound-message-routing">
+<h3><a class="toc-backref" href="#id5">Outbound Message Routing</a><a class="headerlink" href="#outbound-message-routing" title="Permalink to this headline">¶</a></h3>
 <p>Once the bot has received a message and generated a response, how does it send the response back to the user?</p>
 <p>This answer is quite simple: we built a custom Rasa channel for GBM that handles outbound messages using the GBM Python Client.
 Since the Agent ID is present in the message body, we can just use that with the GBM client to send messages directly back to the user from the Rasa channel.</p>
-</section>
-</section>
-<section id="live-agent-transfer">
-<h2><a class="toc-backref" href="#id6">Live Agent Transfer</a><a class="headerlink" href="#live-agent-transfer" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+<div class="section" id="live-agent-transfer">
+<h2><a class="toc-backref" href="#id6">Live Agent Transfer</a><a class="headerlink" href="#live-agent-transfer" title="Permalink to this headline">¶</a></h2>
 <p>After getting the basic routing to and from the bot down, the next feature we wanted to add was live agent support.
 Originally, we implemented this using Twilio integration.
 However, Twilio is too heavy-weight for smaller clients - so we opted to host live agent messaging on our NearMe site.</p>
 <p>So, how do we transfer users to a live agent and route the messages appropriately?</p>
-<section id="maintaining-conversation-state">
-<h3><a class="toc-backref" href="#id7">Maintaining Conversation State</a><a class="headerlink" href="#maintaining-conversation-state" title="Permalink to this headline"></a></h3>
+<div class="section" id="maintaining-conversation-state">
+<h3><a class="toc-backref" href="#id7">Maintaining Conversation State</a><a class="headerlink" href="#maintaining-conversation-state" title="Permalink to this headline">¶</a></h3>
 <p>The challenge here is that the router needs to know whether inbound messages should be routed to the bot, or routed to a live agent.
 And it’s important that they can only be sent to one or the other, otherwise the user might get two responses to their question!</p>
 <p>To tackle this problem, we created a new table called <code class="docutils literal notranslate"><span class="pre">nearme_conversation_status</span></code> in the <code class="docutils literal notranslate"><span class="pre">gbm_agent_env</span></code> database.
@@ -277,23 +363,23 @@ The table has the following format:</p>
 <li><p>If the <code class="docutils literal notranslate"><span class="pre">live_agent</span></code> status is <code class="docutils literal notranslate"><span class="pre">True</span></code>, the message body is forwarded to the NearMe conversation webhook</p></li>
 <li><p>If the <code class="docutils literal notranslate"><span class="pre">live_agent</span></code> status is <code class="docutils literal notranslate"><span class="pre">False</span></code>, the message body is forwarded to GBM Bot Master Core pod in the appropriate environment</p></li>
 </ol>
-</section>
-<section id="live-agent-outbound-messages">
-<h3><a class="toc-backref" href="#id8">Live Agent Outbound Messages</a><a class="headerlink" href="#live-agent-outbound-messages" title="Permalink to this headline"></a></h3>
+</div>
+<div class="section" id="live-agent-outbound-messages">
+<h3><a class="toc-backref" href="#id8">Live Agent Outbound Messages</a><a class="headerlink" href="#live-agent-outbound-messages" title="Permalink to this headline">¶</a></h3>
 <p>In order to send messages from the live agent back to the user, an additional endpoint was created in the bot router API.
 The endpoint <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/router/nearme/route-to-gbm</span></code> accepts a message body and bot ID, and then uses the GBM Python Client to foward the message to the user.</p>
-</section>
-<section id="live-agent-events">
-<h3><a class="toc-backref" href="#id9">Live Agent Events</a><a class="headerlink" href="#live-agent-events" title="Permalink to this headline"></a></h3>
+</div>
+<div class="section" id="live-agent-events">
+<h3><a class="toc-backref" href="#id9">Live Agent Events</a><a class="headerlink" href="#live-agent-events" title="Permalink to this headline">¶</a></h3>
 <p>There are three additional events native to GBM that are supported by the bot router:</p>
 <p><strong>LIVE_AGENT_REQUESTED</strong>: This event is sent to the bot router webhook when a user clicks the “Request a live agent” button from the GBM conversation interface. In this case, the router will change the conversation status to <code class="docutils literal notranslate"><span class="pre">live_agent</span> <span class="pre">=</span> <span class="pre">True</span></code> and start forwarding messages to the NearMe frontend.</p>
 <p><strong>LIVE_AGENT_JOINED</strong>: When the live agent clicks the “Join Conversation” button from the NearMe Conversations page, it can trigger a live agent joined notification for the user. The bot router hosts an endpoint <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">router/nearme/agent-joined</span></code>, which accepts a bot ID and info about the live agent and then uses the GBM client to forward the <code class="docutils literal notranslate"><span class="pre">LIVE_AGENT_JOINED</span></code> event to the user.</p>
 <p><strong>LIVE_AGENT_LEFT</strong>: When the live agent clicks the “Leave Conversation” button from the NearMe Conversations page or when they exit the NearMe site while in conversation with a user, it can trigger a live agent left notification for the user. The bot router hosts an endpoint <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">router/nearme/agent-left</span></code>, which accepts a bot ID and info about the live agent and then uses the GBM client to forward the <code class="docutils literal notranslate"><span class="pre">LIVE_AGENT_LEFT</span></code> event to the user.</p>
 <p>See the endpoint docs here: <a class="reference external" href="https://seachat.seasalt.ai/router/docs">https://seachat.seasalt.ai/router/docs</a></p>
-</section>
-</section>
-<section id="storing-conversation-data">
-<h2><a class="toc-backref" href="#id10">Storing Conversation Data</a><a class="headerlink" href="#storing-conversation-data" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+<div class="section" id="storing-conversation-data">
+<h2><a class="toc-backref" href="#id10">Storing Conversation Data</a><a class="headerlink" href="#storing-conversation-data" title="Permalink to this headline">¶</a></h2>
 <p>One essential feature of the NearMe site is being able to review user conversations and display analytics based on them.
 In order to accomplish this, we save all conversation events to the <code class="docutils literal notranslate"><span class="pre">nearme_events</span></code> table in the <code class="docutils literal notranslate"><span class="pre">nlp-{namespace}</span></code> database.</p>
 <p>Rasa has built-in functionality for persisting events to a database; this is called the TrackerStore.
@@ -373,49 +459,68 @@ The table now has the following format:</p>
 </tbody>
 </table>
 <p>The bot generation API hosts endpoints to GET and POST conversation events. You can view the docs here: <a class="reference external" href="https://seachat.seasalt.ai/bot-actions/docs">https://seachat.seasalt.ai/bot-actions/docs</a></p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>
+           
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="nearme_bot_generation.html" class="btn btn-neutral float-left" title="NearMe Bot Generation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="nearme_bot_analytics.html" class="btn btn-neutral float-right" title="NearMe Bot Query Analytics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="nearme_bot_generation.html" class="btn btn-neutral float-left" title="NearMe Bot Generation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020-2021, Seasalt.ai.</p>
-  </div>
+    <p>
+        &#169; Copyright 2020-2021, Seasalt.ai.
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
         </div>
       </div>
+
     </section>
+
   </div>
-  <script>
+  
+
+  <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-    <!-- Theme Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-10405841-8"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', 'UA-10405841-8', {
-          'anonymize_ip': false,
-      });
-    </script> 
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-10405841-8', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+   
 
 </body>
 </html>

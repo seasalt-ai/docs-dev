@@ -1,0 +1,218 @@
+.. _affect_tutorial:
+
+==================================
+Affect Detection API Tutorial
+==================================
+
+This tutorial will walk through how to use the Affect Detection API for meeting analytics.
+
+.. contents:: Table of Contents
+    :local:
+    :depth: 3
+
+The endpoint for the Affect Detection API is ``https://seaword.seasalt.ai/affect``.
+
+Multilingual Support
+====================
+
+The Emotion endpoints of the Affect Detection API are language agnostic and support multilingual input. Additionally, English sentiment analysis is supported on the Sentiment endpoints of the Affect Detection API.
+
+Callback URLs
+=============
+
+The Affect Detection API uses callback URLs in some of its endpoints. These endpoints can take longer to execute, and the callback URL allows the process to run in the background and return the answer to you when it is finished.
+
+For testing these endpoints, two resources that are available to provide testing URLs as your callback URL are `webhook.site <https://webhook.site/>`_ and `ngrok <https://ngrok.com/>`_.
+
+In this tutorial, we will use a webhook.site URL in the examples.
+
+API Usage
+==========
+
+The Affect Detection API supports two types of analysis, emotion and sentiment. Emotion detection extracts an emotion label (e.g. angry) from audio data. Sentiment detection extracts a sentiment label (e.g. positive) from text data.
+
+POST /emotion
+---------------------
+
+The emotion model produces a label for each individual audio file. The possible labels are ``ang``, ``hap``, ``sad`` and ``neu``.
+
+This process is called with the following POST request:
+
+.. code-block:: bash
+
+    POST https://seaword.seasalt.ai/affect/emotion?file_type={file_type}&access_token={api_key}
+
+The request requires a ``file_type`` parameter that can be either ``file_path`` or ``base64``. The ``file_path`` value expects a .wav file in the ``ngmeeting`` bucket on the Seasalt S3. The ``base64`` value expects a base64 encoding of a .wav file.
+    
+The required request body for inference contains a list of files. For the ``file_path`` parameter, this is a list of file names in the ``ngmeeting`` bucket on the Seasalt S3. For the ``base64`` parameter, this is a list of base64 string encodings of the files. For example, a request body for two files from the ``ngmeeting`` bucket with the ``file_path`` parameter is:
+
+.. code-block:: JSON
+
+   [
+        "seax_014963c302ebf3d65bc52e06365c5fa4/seax_014963c302ebf3d65bc52e06365c5fa4_cu_1654102521489.wav",
+        "seax_014963c302ebf3d65bc52e06365c5fa4/seax_014963c302ebf3d65bc52e06365c5fa4_cu_1654102550403.wav"
+   ]
+
+A successful response returns a list of labels, one for each file sent, in the following format.
+
+.. code-block:: JSON
+
+    [
+        "neu",
+        "hap"
+    ]
+
+.. NOTE:: As the time required increases with the number of files and the length of the audio, this endpoint may timeout if too many files are sent or the audio is too long. In this case, please use the callback endpoint for emotion detection.
+
+
+POST /emotion/callback
+--------------------
+
+The emotion model produces a label for each individual audio file, and returns the results to a callback endpoint.
+
+This process is called with the following POST request:
+
+.. code-block:: bash
+
+    POST https://seaword.seasalt.ai/affect/emotion/callback?file_type={file_type}&access_token={api_key}
+
+The request requires a ``file_type`` parameter that can be either ``file_path`` or ``base64``. The ``file_path`` value expects a .wav file in the ``ngmeeting`` bucket on the Seasalt S3. The ``base64`` value expects a base64 encoding of a .wav file.
+    
+The required request body for inference contains a list of files with some additional information about the speaker and transcription, as well as a unique identifier string. For the ``file_path`` parameter, the ``audio`` parameter is the file names in the ``ngmeeting`` bucket on the Seasalt S3. For the ``base64`` parameter, the ``audio`` paramter is the base64 string encodings of the files. For example, a request body for two files from the ``ngmeeting`` bucket with the ``file_path`` parameter is:
+
+.. code-block:: JSON
+
+    {
+        "data": [
+            {
+                "transcription": "",
+                "audio": "seax_014963c302ebf3d65bc52e06365c5fa4/seax_014963c302ebf3d65bc52e06365c5fa4_cu_1654102521489.wav",
+                "id": "44eab1f7dd344e29849c256fdde0325c",
+                "speaker": [
+                    "John Smith"
+                ]
+            },
+            {
+                "transcription": "",
+                "audio": "seax_014963c302ebf3d65bc52e06365c5fa4/seax_014963c302ebf3d65bc52e06365c5fa4_cu_1654102550403.wav",
+                "id": "55eab1f7dd344e29849c256fdde0325c",
+                "speaker": [
+                    "John Smith"
+                ]
+            }
+        ],
+        "url": "https://webhook.site/e28236db-d728-4ccb-a1b5-1a59cc8a7333"
+    }
+
+.. IMPORTANT:: As this endpoint is intended for emotion detection tasks that take a long time, this is implemented as a callback. A successful response will return a success message of the process starting, not the labels directly.
+
+The callback function will then start producing emotion labels. When the emotion detection is complete, a PUT request will be sent with the detected labels to the callback url provided in the original request body.
+
+The final labels will appear in the following JSON format:
+
+.. code-block:: JSON
+
+    {
+        "data": [
+            {
+                "label": "neu",
+                "id": "44eab1f7dd344e29849c256fdde0325c"
+            },
+            {
+                "label": "hap",
+                "id": "55eab1f7dd344e29849c256fdde0325c"
+            }
+        ]
+    }
+
+POST /sentiment
+---------------------
+
+The sentiment model produces a label for each individual text string. The possible labels are ``neg``, ``pos`` and ``neu``.
+
+This process is called with the following POST request:
+
+.. code-block:: bash
+
+    POST https://seaword.seasalt.ai/affect/sentiment?access_token={api_key}
+
+The required request body for inference contains a list of transcription strings in the following format:
+
+.. code-block:: JSON
+
+    [
+        {
+            "transcription": "This is great!"
+        },
+        {
+            "transcription": "I never want to talk to you again"
+        }
+    ]
+
+A successful response returns a list of labels, one for each string sent, in the following format.
+
+.. code-block:: JSON
+
+    [
+        "pos",
+        "neg"
+    ]
+
+.. NOTE:: As the time required increases with the number of strings, this endpoint may timeout if too many strings are sent. In this case, please use the callback endpoint for sentimnet detection.
+
+
+POST /sentiment/callback
+--------------------
+
+The sentiment model produces a label for each individual text string, and returns the results to a callback endpoint.
+
+This process is called with the following POST request:
+
+.. code-block:: bash
+
+    POST https://seaword.seasalt.ai/affect/sentimnet/callback?access_token={api_key}
+
+The required request body for inference contains a list of transcription lines with some additional information about the speaker, as well as a unique identifier string, in the following format.
+
+.. code-block:: JSON
+
+    {
+        "data": [
+            {
+                "transcription": "This is great!",
+                "id": "44eab1f7dd344e29849c256fdde0325c",
+                "speaker": [
+                    "John Smith"
+                ]
+            },
+            {
+                "transcription": "I never want to talk to you again",
+                "id": "55eab1f7dd344e29849c256fdde0325c",
+                "speaker": [
+                    "John Smith"
+                ]
+            }
+        ],
+        "url": "https://webhook.site/e28236db-d728-4ccb-a1b5-1a59cc8a7333"
+    }
+
+.. IMPORTANT:: As this endpoint is intended for sentiment detection tasks that take a long time, this is implemented as a callback. A successful response will return a success message of the process starting, not the labels directly.
+
+The callback function will then start producing sentiment labels. When the sentiment detection is complete, a PUT request will be sent with the detected labels to the callback url provided in the original request body.
+
+The final labels will appear in the following JSON format:
+
+.. code-block:: JSON
+
+    {
+        "data": [
+            {
+                "label": "pos",
+                "id": "44eab1f7dd344e29849c256fdde0325c"
+            },
+            {
+                "label": "neg",
+                "id": "55eab1f7dd344e29849c256fdde0325c"
+            }
+        ]
+    }

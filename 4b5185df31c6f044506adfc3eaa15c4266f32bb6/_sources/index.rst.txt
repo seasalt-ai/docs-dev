@@ -42,14 +42,8 @@ Welcome to SeaChat's Master Documentation!
    :titlesonly:
    :caption: SeaWord
 
-   SeaWord <nlp/readme>
-   Summarization API Tutorial <nlp/sum_tutorial>
-   Topic Extraction API Tutorial <nlp/topic_tutorial>
-   Action Extraction API Tutorial <nlp/action_tutorial>
-   Cross Lingual NER API Tutorial <nlp/xlingualNER_tutorial>
-   Machine Reading API Tutorial <nlp/mr_tutorial>
-   Affect Detection API Tutoral <nlp/affect_tutorial>
-   Redaction Service Tutorial <nlp/redaction_tutorial>
+   SeaWord v1 APIs <nlp/v1/index>
+   SeaWord v2 APIs <nlp/v2/index>
 
 .. toctree::
    :maxdepth: 3

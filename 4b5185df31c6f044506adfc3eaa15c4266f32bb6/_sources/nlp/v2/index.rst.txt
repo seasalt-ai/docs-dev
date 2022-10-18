@@ -1,0 +1,12 @@
+
+Welcome to SeaWord v2
+===========================================
+
+.. toctree::
+   :maxdepth: 2
+   :glob:
+   :titlesonly:
+   :caption: SeaWord v2
+
+   readme
+   api
