@@ -178,3 +178,16 @@ Once the NLP processing is completed (this make take several minutes depending o
 Each service will append its results to each individual segment and/or the top-level meeting.
 For example, the summarization service performs a short summary on each individual utterance as well as a long summary on the entire meeting transcription.
 If any errors occur during the processing, the error message will be appended to the `errors` field, but any successful results will still try to be returned as normal.
+
+POST /v2/process/meeting/live
+-----------------------------
+
+.. code-block:: bash
+
+    POST https://seaword.seasalt.ai/nlp/v2/process/meeting/live?access_token={api_key}
+
+The request and response bodies for this endpoint are *exactly the same* as those for the `/v2/process/meeting` endpoint.
+
+The reason we have almost identical endpoints for live meetings vs offline meetings is because some of the NLP services perform significantly better when they have more context.
+For example, topic extraction will not return salient topics for the entire meeting if it is asked to predict topics for one segment at a time.
+To solve this, we cache some of the meeting segments as they come in and then do the processing for certain NLP services in batches.
