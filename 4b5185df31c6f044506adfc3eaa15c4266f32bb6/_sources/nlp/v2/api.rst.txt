@@ -82,7 +82,7 @@ POST /v2/process/meeting
 
 .. code-block:: bash
 
-    POST https://seaword.seasalt.ai/nlp/v2/process/meeting?access_token={api_key}
+    POST https://seaword.seasalt.ai/nlp/v2/process/meeting?access_token={api_key}&is_live={bool}
 
 The required request body for processing a meeting transcription is in the following format:
 
@@ -110,6 +110,12 @@ The required request body for processing a meeting transcription is in the follo
         ],
         "callback_url": "https://your-domain.com/callback/endpoint"
     }
+
+
+If the meeting is in progress, and you want live results for each transcription, set the query parameter `is_live` to `True`.
+Some of the NLP services perform significantly better when they have more context, so it's important to let the endpoint know that a meeting is live.
+For example, topic extraction will not return salient topics for the entire meeting if it is asked to predict topics for one segment at a time.
+To solve this, we cache some of the meeting segments as they come in and then do the processing for certain NLP services in batches.
 
 The endpoint will only perform processing for the services specified in the `nlp_processes` field.
 Once the processing is complete for *all* the tasks, the API will send a callback POST request to the URL specified in the `callback_url` field.
@@ -179,15 +185,3 @@ Each service will append its results to each individual segment and/or the top-l
 For example, the summarization service performs a short summary on each individual utterance as well as a long summary on the entire meeting transcription.
 If any errors occur during the processing, the error message will be appended to the `errors` field, but any successful results will still try to be returned as normal.
 
-POST /v2/process/meeting/live
------------------------------
-
-.. code-block:: bash
-
-    POST https://seaword.seasalt.ai/nlp/v2/process/meeting/live?access_token={api_key}
-
-The request and response bodies for this endpoint are *exactly the same* as those for the `/v2/process/meeting` endpoint.
-
-The reason we have almost identical endpoints for live meetings vs offline meetings is because some of the NLP services perform significantly better when they have more context.
-For example, topic extraction will not return salient topics for the entire meeting if it is asked to predict topics for one segment at a time.
-To solve this, we cache some of the meeting segments as they come in and then do the processing for certain NLP services in batches.

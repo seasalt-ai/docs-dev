@@ -223,7 +223,6 @@
 <li><p><a class="reference internal" href="#api-usage" id="id9">API Usage</a></p>
 <ul>
 <li><p><a class="reference internal" href="#post-v2-process-meeting" id="id10">POST /v2/process/meeting</a></p></li>
-<li><p><a class="reference internal" href="#post-v2-process-meeting-live" id="id11">POST /v2/process/meeting/live</a></p></li>
 </ul>
 </li>
 </ul>
@@ -332,7 +331,7 @@ These endpoints can take longer to execute, and the callback URL allows the proc
 <h2><a class="toc-backref" href="#id9">API Usage</a><a class="headerlink" href="#api-usage" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="post-v2-process-meeting">
 <h3><a class="toc-backref" href="#id10">POST /v2/process/meeting</a><a class="headerlink" href="#post-v2-process-meeting" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>POST https://seaword.seasalt.ai/nlp/v2/process/meeting?access_token<span class="o">={</span>api_key<span class="o">}</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>POST https://seaword.seasalt.ai/nlp/v2/process/meeting?access_token<span class="o">={</span>api_key<span class="o">}</span><span class="p">&amp;</span><span class="nv">is_live</span><span class="o">={</span>bool<span class="o">}</span>
 </pre></div>
 </div>
 <p>The required request body for processing a meeting transcription is in the following format:</p>
@@ -360,6 +359,10 @@ These endpoints can take longer to execute, and the callback URL allows the proc
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>If the meeting is in progress, and you want live results for each transcription, set the query parameter <cite>is_live</cite> to <cite>True</cite>.
+Some of the NLP services perform significantly better when they have more context, so it’s important to let the endpoint know that a meeting is live.
+For example, topic extraction will not return salient topics for the entire meeting if it is asked to predict topics for one segment at a time.
+To solve this, we cache some of the meeting segments as they come in and then do the processing for certain NLP services in batches.</p>
 <p>The endpoint will only perform processing for the services specified in the <cite>nlp_processes</cite> field.
 Once the processing is complete for <em>all</em> the tasks, the API will send a callback POST request to the URL specified in the <cite>callback_url</cite> field.</p>
 <p>Each NLP service may or may not require different fields from the meeting transcription.
@@ -478,16 +481,6 @@ The following table shows which NLP processes require which fields:</p>
 <p>Each service will append its results to each individual segment and/or the top-level meeting.
 For example, the summarization service performs a short summary on each individual utterance as well as a long summary on the entire meeting transcription.
 If any errors occur during the processing, the error message will be appended to the <cite>errors</cite> field, but any successful results will still try to be returned as normal.</p>
-</div>
-<div class="section" id="post-v2-process-meeting-live">
-<h3><a class="toc-backref" href="#id11">POST /v2/process/meeting/live</a><a class="headerlink" href="#post-v2-process-meeting-live" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>POST https://seaword.seasalt.ai/nlp/v2/process/meeting/live?access_token<span class="o">={</span>api_key<span class="o">}</span>
-</pre></div>
-</div>
-<p>The request and response bodies for this endpoint are <em>exactly the same</em> as those for the <cite>/v2/process/meeting</cite> endpoint.</p>
-<p>The reason we have almost identical endpoints for live meetings vs offline meetings is because some of the NLP services perform significantly better when they have more context.
-For example, topic extraction will not return salient topics for the entire meeting if it is asked to predict topics for one segment at a time.
-To solve this, we cache some of the meeting segments as they come in and then do the processing for certain NLP services in batches.</p>
 </div>
 </div>
 </div>
