@@ -341,7 +341,8 @@ These endpoints can take longer to execute, and the callback URL allows the proc
     <span class="nt">&quot;nlp_processes&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="s2">&quot;ACTIONS&quot;</span><span class="p">,</span>
         <span class="s2">&quot;TOPICS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;SUMMARIZATION&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;SHORT_SUMMARY&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;LONG_SUMMARY&quot;</span><span class="p">,</span>
         <span class="s2">&quot;EMOTION&quot;</span><span class="p">,</span>
         <span class="s2">&quot;SENTIMENT&quot;</span>
     <span class="p">]</span>
@@ -449,7 +450,8 @@ The following table shows which NLP processes require which fields:</p>
     <span class="nt">&quot;nlp_processes&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="s2">&quot;ACTIONS&quot;</span><span class="p">,</span>
         <span class="s2">&quot;TOPICS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;SUMMARIZATION&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;SHORT_SUMMARY&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;LONG_SUMMARY&quot;</span><span class="p">,</span>
         <span class="s2">&quot;EMOTION&quot;</span><span class="p">,</span>
         <span class="s2">&quot;SENTIMENT&quot;</span>
     <span class="p">]</span>
@@ -461,9 +463,12 @@ The following table shows which NLP processes require which fields:</p>
                 <span class="s2">&quot;Speaker1&quot;</span>
             <span class="p">],</span>
             <span class="nt">&quot;action_items&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s2">&quot;Speaker1 will process the photos and share them on Friday.&quot;</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;actionable_segment&quot;</span><span class="p">:</span> <span class="s2">&quot;I&#39;m going to process the photos and share them on Friday!&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;action_item&quot;</span><span class="p">:</span> <span class="s2">&quot;Speaker1 will process the photos and share them on Friday.&quot;</span>
+                <span class="p">}</span>
             <span class="p">],</span>
-            <span class="nt">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Speaker1 is planning on processing her photos from Yellowstone this weekend.&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;short_summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Speaker1 is planning on processing her photos from Yellowstone this weekend.&quot;</span><span class="p">,</span>
             <span class="nt">&quot;emotion&quot;</span><span class="p">:</span> <span class="s2">&quot;happy&quot;</span><span class="p">,</span>
             <span class="nt">&quot;sentiment&quot;</span><span class="p">:</span> <span class="s2">&quot;positive&quot;</span>
         <span class="p">}</span>
@@ -473,7 +478,7 @@ The following table shows which NLP processes require which fields:</p>
         <span class="s2">&quot;Yellowstone&quot;</span><span class="p">,</span>
         <span class="s2">&quot;this weekend&quot;</span>
     <span class="p">],</span>
-    <span class="nt">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;The team shares what they did over the weekend and Speaker1 went to Yellowstone.&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;long_summary&quot;</span><span class="p">:</span> <span class="s2">&quot;The team shares what they did over the weekend and Speaker1 went to Yellowstone.&quot;</span><span class="p">,</span>
     <span class="nt">&quot;errors&quot;</span><span class="p">:</span> <span class="p">[]</span>
 <span class="p">}</span>
 </pre></div>

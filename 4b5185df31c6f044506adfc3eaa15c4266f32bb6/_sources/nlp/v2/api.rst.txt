@@ -94,7 +94,8 @@ The required request body for processing a meeting transcription is in the follo
         "nlp_processes": [
             "ACTIONS",
             "TOPICS",
-            "SUMMARIZATION",
+            "SHORT_SUMMARY",
+            "LONG_SUMMARY",
             "EMOTION",
             "SENTIMENT"
         ]
@@ -153,7 +154,8 @@ Once the NLP processing is completed (this make take several minutes depending o
         "nlp_processes": [
             "ACTIONS",
             "TOPICS",
-            "SUMMARIZATION",
+            "SHORT_SUMMARY",
+            "LONG_SUMMARY",
             "EMOTION",
             "SENTIMENT"
         ]
@@ -165,9 +167,12 @@ Once the NLP processing is completed (this make take several minutes depending o
                     "Speaker1"
                 ],
                 "action_items": [
-                    "Speaker1 will process the photos and share them on Friday."
+                    {
+                        "actionable_segment": "I'm going to process the photos and share them on Friday!",
+                        "action_item": "Speaker1 will process the photos and share them on Friday."
+                    }
                 ],
-                "summary": "Speaker1 is planning on processing her photos from Yellowstone this weekend.",
+                "short_summary": "Speaker1 is planning on processing her photos from Yellowstone this weekend.",
                 "emotion": "happy",
                 "sentiment": "positive"
             }
@@ -177,7 +182,7 @@ Once the NLP processing is completed (this make take several minutes depending o
             "Yellowstone",
             "this weekend"
         ],
-        "summary": "The team shares what they did over the weekend and Speaker1 went to Yellowstone.",
+        "long_summary": "The team shares what they did over the weekend and Speaker1 went to Yellowstone.",
         "errors": []
     }
 
